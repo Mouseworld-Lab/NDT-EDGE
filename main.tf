@@ -7,7 +7,6 @@ terraform {
   }
 }
 
-
 provider "openstack" {
   auth_url    = "http://192.168.27.44:5000/v3/auth/tokens"
   tenant_name = "admin"
