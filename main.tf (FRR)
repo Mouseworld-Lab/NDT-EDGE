@@ -1,0 +1,102 @@
+terraform {
+  required_providers {
+    openstack = {
+      source  = "terraform-provider-openstack/openstack"
+      version = "~> 1.0"  
+    }
+  }
+}
+
+provider "openstack" {
+  auth_url    = "http://192.168.27.44:5000/v3/auth/tokens"
+  tenant_name = "admin"
+  user_name   = "admin"
+  password    = "openstack-ndt"
+  domain_name = "Default"
+  region      = "RegionOne"
+}
+
+variable "image_name"   { default = "Ubuntu 22.04" }
+variable "flavor_name"  { default = "r4d50v2" }
+variable "mgmt_network_name" { default = "management-network" }
+variable "mouseworld_network_name" { default = "Mouseworld-net" }
+
+
+data "openstack_images_image_v2" "image" {
+    name = var.image_name
+}
+
+data "openstack_compute_flavor_v2" "flavor" {
+    name = var.flavor_name    
+}
+
+data "openstack_networking_network_v2" "mgmt_network" {
+  name = var.mgmt_network_name
+}
+
+data "openstack_networking_network_v2" "mouseworld_network" {
+  name = var.mouseworld_network_name
+}
+
+data "openstack_networking_subnet_v2" "subnet_hl4_5_1" {
+  name       = "HL4-5-1"
+  network_id = data.openstack_networking_network_v2.mouseworld_network.id
+}
+
+resource "openstack_networking_port_v2" "port_hl5_1_1" {
+  name       = "mouseworld-port-hl5-1-1"
+  network_id = data.openstack_networking_network_v2.mouseworld_network.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_hl4_5_1.id
+    ip_address = "10.0.3.10"
+  }
+}
+
+resource "openstack_networking_port_v2" "port_hl4_1_1" {
+  name       = "mouseworld-port-hl4-1-1"
+  network_id = data.openstack_networking_network_v2.mouseworld_network.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_hl4_5_1.id
+    ip_address = "10.0.3.11"
+  }
+}
+
+resource "openstack_compute_instance_v2" "HL5-1-1" {
+    name        = "HL5-1-1"
+    image_id    = data.openstack_images_image_v2.image.id
+    flavor_id   = data.openstack_compute_flavor_v2.flavor.id
+    security_groups = ["default"]
+
+    network {
+        uuid = data.openstack_networking_network_v2.mgmt_network.id
+    }
+
+    network {
+      port = openstack_networking_port_v2.port_hl5_1_1.id
+    }
+    
+    user_data = file("cloud-init-frr.yaml")
+
+}
+
+
+resource "openstack_compute_instance_v2" "HL4-1-1" {
+    name        = "HL4-1-1"
+    image_id    = data.openstack_images_image_v2.image.id
+    flavor_id   = data.openstack_compute_flavor_v2.flavor.id
+    security_groups = ["default"]
+
+    network {
+        uuid = data.openstack_networking_network_v2.mgmt_network.id
+    }
+
+    network {
+      port = openstack_networking_port_v2.port_hl4_1_1.id
+    }
+    
+    user_data = file("cloud-init-frr.yaml")
+
+}
+
