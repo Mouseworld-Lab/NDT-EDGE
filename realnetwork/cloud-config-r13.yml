@@ -1,17 +1,17 @@
 #cloud-config
-hostname: r11
-fqdn: r11
+hostname: r13
+fqdn: r13
 manage_etc_hosts: True
 
 users:
-  - name: r11
+  - name: r13
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     groups: sudo
 
 chpasswd:
   list: |
-    r11:r11-frr
+    r13:r13-frr
   expire: false
   encrypted: false
 
@@ -21,5 +21,7 @@ timezone: Europe/Madrid
 package_update: true
 package_upgrade: true
 
-
+runcmd:
+  - git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /opt/realnetwork
+  - cp /opt/realnetwork/config/${hostname}.conf /etc/frr/frr.conf
 

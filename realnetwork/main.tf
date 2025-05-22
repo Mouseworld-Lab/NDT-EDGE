@@ -186,7 +186,7 @@ resource "openstack_networking_port_v2" "eth2_r1" {
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
-    ip_address = "192.168.3.1"
+    ip_address = "192.168.3.10"
   }
 }
 resource "openstack_networking_port_v2" "eth3_r1" {
@@ -195,7 +195,7 @@ resource "openstack_networking_port_v2" "eth3_r1" {
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r2.id                
-    ip_address = "192.168.4.1"
+    ip_address = "192.168.4.10"
   }
 }
 resource "openstack_networking_port_v2" "eth4_r1" {
@@ -204,7 +204,7 @@ resource "openstack_networking_port_v2" "eth4_r1" {
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
-    ip_address = "192.168.1.1"
+    ip_address = "192.168.1.10"
   }
 }
 
@@ -454,11 +454,6 @@ resource "openstack_compute_instance_v2" "r1" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r1.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }  
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -480,11 +475,6 @@ resource "openstack_compute_instance_v2" "r2" {
   name            = "r2"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
-  provisioner "file" {
-    source      = "/config/r2.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
 
   #mgmt
   network {
@@ -511,11 +501,6 @@ resource "openstack_compute_instance_v2" "r3" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r3.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -541,11 +526,6 @@ resource "openstack_compute_instance_v2" "r4" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r4.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -568,10 +548,6 @@ resource "openstack_compute_instance_v2" "r5" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r5.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -591,10 +567,6 @@ resource "openstack_compute_instance_v2" "r6" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r6.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -616,12 +588,6 @@ resource "openstack_compute_instance_v2" "r7" {
   name            = "r7"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-  security_groups = [""]
-
-  provisioner "file" {
-    source      = "/config/r7.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -644,10 +610,6 @@ resource "openstack_compute_instance_v2" "r11" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r11.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -667,10 +629,6 @@ resource "openstack_compute_instance_v2" "r12" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r12.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -690,10 +648,6 @@ resource "openstack_compute_instance_v2" "r13" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
 
-  provisioner "file" {
-    source      = "/config/r13.config"                     
-    destination = "/etc/frr/frr.conf"               
-  }
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id

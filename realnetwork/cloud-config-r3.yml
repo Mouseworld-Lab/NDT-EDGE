@@ -21,5 +21,6 @@ timezone: Europe/Madrid
 package_update: true
 package_upgrade: true
 
-
-
+runcmd:
+  - git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /opt/realnetwork
+  - cp /opt/realnetwork/config/${hostname}.conf /etc/frr/frr.conf

@@ -1,0 +1,29 @@
+#cloud-config
+hostname: r2
+fqdn: r2
+manage_etc_hosts: True
+
+users:
+  - name: r2
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    r2:r2-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+runcmd:
+  - git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /opt/realnetwork
+  - cp /opt/realnetwork/config/${hostname}.conf /etc/frr/frr.conf
+
+
+ - git clone --depth 1 --filter=blob:none --sparse  https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/repo && cd /home/repo && git sparse-checkout set Real Network/config && mv config/${hostname}.conf/* /etc/frr/frr.conf && rm -rf /home/edge/repo
