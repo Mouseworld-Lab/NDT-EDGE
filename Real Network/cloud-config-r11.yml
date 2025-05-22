@@ -1,0 +1,25 @@
+#cloud-config
+hostname: r11
+fqdn: r11
+manage_etc_hosts: True
+
+users:
+  - name: r11
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    r11:r11-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+
+

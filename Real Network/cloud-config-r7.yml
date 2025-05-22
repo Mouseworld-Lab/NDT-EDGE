@@ -1,0 +1,25 @@
+#cloud-config
+hostname: r7
+fqdn: r7
+manage_etc_hosts: True
+
+users:
+  - name: r7
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    r7:r7-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+
+

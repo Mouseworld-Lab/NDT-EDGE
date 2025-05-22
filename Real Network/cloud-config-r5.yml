@@ -1,0 +1,25 @@
+#cloud-config
+hostname: r5
+fqdn: r5
+manage_etc_hosts: True
+
+users:
+  - name: r5
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    r5:r5-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+
+

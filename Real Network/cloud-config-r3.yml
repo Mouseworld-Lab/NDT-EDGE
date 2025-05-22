@@ -1,0 +1,25 @@
+#cloud-config
+hostname: r3
+fqdn: r3
+manage_etc_hosts: True
+
+users:
+  - name: r3
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    r3:r3-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+
+
