@@ -1,51 +1,79 @@
 name: 6gndt
 nodes:
-- name: hl511
+- name: r1
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL5-1-1.conf
+    file: /r1.conf
     image: frr-ubuntu22:grpc
   interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-- name: hl411
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL4-1-1.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
     eth2:
       name: Ethernet2
     eth3:
       name: Ethernet3
-- name: hl421
+    eth4:
+      name: Ethernet4
+- name: r4
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL4-2-1.conf
+    file: /r4.conf
     image: frr-ubuntu22:grpc
   interfaces:
-    eth1:
-      name: Ethernet1
     eth2:
       name: Ethernet2
     eth3:
       name: Ethernet3
-- name: hl311
+    eth4:
+      name: Ethernet4
+- name: r5
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL3-1-1.conf
+    file: /r5.conf
+    image: frr-ubuntu22:grpc
+  interfaces:
+    eth2:
+      name: Ethernet2
+    eth3:
+      name: Ethernet3
+- name: r6
+  vendor: HOST
+  config:
+    config_path: /etc/frr
+    config_file: frr.conf
+    file: /r6.conf
+    image: frr-ubuntu22:grpc
+  interfaces:
+    eth2:
+      name: Ethernet2
+    eth3:
+      name: Ethernet3
+    eth4:
+      name: Ethernet4
+- name: r7
+  vendor: HOST
+  config:
+    config_path: /etc/frr
+    config_file: frr.conf
+    file: /r7.conf
+    image: frr-ubuntu22:grpc
+  interfaces:
+    eth2:
+      name: Ethernet2
+    eth3:
+      name: Ethernet3
+    eth4:
+      name: Ethernet4
+- name: r2
+  vendor: HOST
+  config:
+    config_path: /etc/frr
+    config_file: frr.conf
+    file: /r2.conf
     image: frr-ubuntu22:grpc
   interfaces:
     eth1:
@@ -58,16 +86,14 @@ nodes:
       name: Ethernet4
     eth5:
       name: Ethernet5
-- name: hl321
+- name: r3
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL3-2-1.conf
+    file: /r3.conf
     image: frr-ubuntu22:grpc
   interfaces:
-    eth1:
-      name: Ethernet1
     eth2:
       name: Ethernet2
     eth3:
@@ -76,82 +102,36 @@ nodes:
       name: Ethernet4
     eth5:
       name: Ethernet5
-- name: hl231
+- name: r11
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL2-3-1.conf
+    file: /r11.conf
     image: frr-ubuntu22:grpc
   interfaces:
-    eth1:
-      name: Ethernet1
     eth2:
       name: Ethernet2
     eth3:
       name: Ethernet3
-- name: hl241
+- name: r12
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL2-4-1.conf
+    file: /r12.conf
     image: frr-ubuntu22:grpc
   interfaces:
-    eth1:
-      name: Ethernet1
     eth2:
       name: Ethernet2
-    eth3:
-      name: Ethernet3
-- name: hl211
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL2-1-1.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-- name: hl221
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL2-2-1.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
     eth4:
       name: Ethernet4
-- name: hl512
+- name: r13
   vendor: HOST
   config:
     config_path: /etc/frr
     config_file: frr.conf
-    file: /HL5-1-2.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-- name: hl412
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL4-1-2.conf
+    file: /r13.conf
     image: frr-ubuntu22:grpc
   interfaces:
     eth1:
@@ -160,63 +140,6 @@ nodes:
       name: Ethernet2
     eth3:
       name: Ethernet3
-- name: hl422
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL4-2-2.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-- name: hl312
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL3-1-2.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-- name: hl322
-  vendor: HOST
-  config:
-    config_path: /etc/frr
-    config_file: frr.conf
-    file: /HL3-2-2.conf
-    image: frr-ubuntu22:grpc
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-
-
-
-- name: cgserver
-  vendor: HOST
-  config:
-    config_path: /home/cognet
-    config_file: cgserver-config.py
-    file: /configuracion/cgserver-config.py
-    image: javi14t/cgserver:last
-  interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
 - name: ddosserver
   vendor: HOST
   config:
@@ -227,12 +150,6 @@ nodes:
   interfaces:
     eth1:
       name: Ethernet1
-    eth2:
-      name: Ethernet2
-
-
-
-
 - name: gateway1
   vendor: HOST
   config:
@@ -244,107 +161,63 @@ nodes:
     eth1:
       name: Ethernet1
 links:
-- a_node: hl511
-  a_int: eth1
-  z_node: hl421
-  z_int: eth1
-- a_node: hl411
-  a_int: eth1
-  z_node: hl511
-  z_int: eth2
-- a_node: hl421
+- a_node: r4
   a_int: eth2
-  z_node: hl411
+  z_node: r1
   z_int: eth2
-- a_node: hl321
-  a_int: eth1
-  z_node: hl421
-  z_int: eth3
-- a_node: hl311
-  a_int: eth1
-  z_node: hl411
-  z_int: eth3
-- a_node: hl311
-  a_int: eth2
-  z_node: hl321
-  z_int: eth2
-- a_node: hl311
-  a_int: eth5
-  z_node: cgserver
-  z_int: eth2
-- a_node: hl321
-  a_int: eth5
-  z_node: cgserver
-  z_int: eth1
-- a_node: hl311
-  a_int: eth4
-  z_node: ddosserver
-  z_int: eth2
-- a_node: hl321
-  a_int: eth4
-  z_node: ddosserver
-  z_int: eth1
-- a_node: hl231
-  a_int: eth1
-  z_node: hl311
-  z_int: eth3
-- a_node: hl241
-  a_int: eth1
-  z_node: hl321
-  z_int: eth3
-- a_node: hl241
-  a_int: eth2
-  z_node: hl231
-  z_int: eth2
-- a_node: hl211
-  a_int: eth1
-  z_node: hl231
-  z_int: eth3
-- a_node: hl221
-  a_int: eth1
-  z_node: hl241
-  z_int: eth3
-- a_node: hl221
-  a_int: eth2
-  z_node: hl211
-  z_int: eth2
-- a_node: hl211
+- a_node: r5
   a_int: eth3
-  z_node: hl312
-  z_int: eth3
-- a_node: hl221
+  z_node: r2
+  z_int: eth5
+- a_node: r6
   a_int: eth3
-  z_node: hl322
-  z_int: eth3
-- a_node: hl221
+  z_node: r5
+  z_int: eth2
+- a_node: r6
   a_int: eth4
-  z_node: gateway1
-  z_int: eth1
-- a_node: hl312
+  z_node: r4
+  z_int: eth4
+- a_node: r7
   a_int: eth2
-  z_node: hl322
+  z_node: r6
   z_int: eth2
-- a_node: hl312
-  a_int: eth1
-  z_node: hl412
+- a_node: r7
+  a_int: eth4
+  z_node: r3
   z_int: eth3
-- a_node: hl322
-  a_int: eth1
-  z_node: hl422
+- a_node: r2
+  a_int: eth3
+  z_node: r1
   z_int: eth3
-- a_node: hl412
+- a_node: r3
+  a_int: eth4
+  z_node: r2
+  z_int: eth4
+- a_node: r11
   a_int: eth2
-  z_node: hl422
+  z_node: r1
+  z_int: eth4
+- a_node: r11
+  a_int: eth3
+  z_node: r4
+  z_int: eth3
+- a_node: r12
+  a_int: eth2
+  z_node: r2
   z_int: eth2
-- a_node: hl412
+- a_node: r12
+  a_int: eth4
+  z_node: r3
+  z_int: eth5
+- a_node: r13
   a_int: eth1
-  z_node: hl512
-  z_int: eth2
-- a_node: hl422
-  a_int: eth1
-  z_node: hl512
+  z_node: ddosserver
   z_int: eth1
-
-
-
-
+- a_node: r13
+  a_int: eth2
+  z_node: r3
+  z_int: eth2
+- a_node: r13
+  a_int: eth3
+  z_node: r7
+  z_int: eth3
