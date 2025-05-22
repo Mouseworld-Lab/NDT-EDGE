@@ -2,6 +2,6 @@
 
 
 
-![INFRA](INFRA_NDT.png)
+![INFRA](INFRA-NDT.png)
 
-![NDT_architecture](INFRA_NDT.png)
+![NDT_architecture](NDT_architecture.png)
