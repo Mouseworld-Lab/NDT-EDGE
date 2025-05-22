@@ -4,35 +4,31 @@
   gather_facts: no
   vars:
     pods:
-      - hl511
-      - hl411
-      - hl421
-      - hl311
-      - hl321
-      - hl231
-      - hl241
-      - hl211
-      - hl221
-      - hl312
-      - hl322
-      - hl412
-      - hl422
-      - hl512
+      - r1
+      - r2
+      - r3
+      - r4
+      - r5
+      - r6
+      - r7
+      - r11
+      - r12
+      - r13
   tasks: 
  #--------------------------------------------Deploy kne---------------------------------------------------------------------------
  
     - name: Deploy topology
-      shell: kne create ~/MouseWorld/deployment-kne/mouseworld_topology/Topology.yaml # Configure the path where the kne topology file is
+      shell: kne create ~/NDT-EDGE/deployment-kne/mouseworld_topology/Topology.yaml # Configure the path where the kne topology file is
 
 
     - name: Enable OSPFd in FRR configuration
-      shell: kubectl exec -n mouseworld {{ item }} -- sh -c "sed -i 's/^ospfd=.*/ospfd=yes/' /etc/frr/daemons"
+      shell: kubectl exec -n 6gndt {{ item }} -- sh -c "sed -i 's/^ospfd=.*/ospfd=yes/' /etc/frr/daemons"
       loop: "{{ pods }}"
       loop_control:
         loop_var: item
 
     - name: Restart FRR to apply changes
-      shell: kubectl exec -n mouseworld {{ item }} -- sudo /usr/lib/frr/frrinit.sh start
+      shell: kubectl exec -n 6gndt {{ item }} -- sudo /usr/lib/frr/frrinit.sh start
       loop: "{{ pods }}"
       loop_control:
         loop_var: item
@@ -42,7 +38,7 @@
 
 
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=/home/mw/MouseWorld/deployment-kne/mouseworld_topology/configuracion/gateway2-config.py -n mouseworld
+      shell: kubectl create configmap gateway2-config --from-file=/home/mw/MouseWorld/deployment-kne/mouseworld_topology/configuracion/gateway2-config.py -n 6gndt
 
     - name: Deploy gateway2
       shell: kubectl apply -f ~/MouseWorld/deployment-kne/mouseworld_topology/pod-gateway2.yaml

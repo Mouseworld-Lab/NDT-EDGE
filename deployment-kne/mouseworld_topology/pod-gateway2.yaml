@@ -5,7 +5,7 @@ items:
   kind: Topology
   metadata:
     name: gateway2
-    namespace: mouseworld
+    namespace: 6gndt
   spec:
     links:
     - uid: 1
@@ -23,7 +23,7 @@ items:
   kind: Pod
   metadata:
     name:  gateway2
-    namespace: mouseworld
+    namespace: 6gndt
   spec:
     containers:
     - image: javi14t/internet:last
