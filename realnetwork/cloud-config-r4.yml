@@ -22,5 +22,8 @@ package_update: true
 package_upgrade: true
 
 runcmd:
-  - git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /opt/realnetwork
-  - cp /opt/realnetwork/config/${hostname}.conf /etc/frr/frr.conf
+  - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/r4/NDT-EDGE
+  - sudo cp /home/r4/NDT-EDGE/realnetwork/config/r4.conf /etc/frr/frr.conf
+  - sudo chown frr:frr /etc/frr/frr.conf
+  - sudo rm -rf /home/r4/NDT-EDGE
+  - sudo /usr/lib/frr/frrinit.sh restart
