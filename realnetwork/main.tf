@@ -181,35 +181,35 @@ data "openstack_networking_subnet_v2" "subnet_r1r2" {
 
 
 resource "openstack_networking_port_v2" "eth2_r1" {
-  name       = "r1_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r1r4.id
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
-    ip_address = "192.168.3.10"
+    ip_address = "192.168.3.1"
   }
 }
 resource "openstack_networking_port_v2" "eth3_r1" {
-  name       = "r1_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r1r2.id
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r2.id                
-    ip_address = "192.168.4.10"
+    ip_address = "192.168.4.1"
   }
 }
 resource "openstack_networking_port_v2" "eth4_r1" {
-  name       = "r1_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r1r11.id
 
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
-    ip_address = "192.168.1.10"
+    ip_address = "192.168.1.1"
   }
 }
 
 resource "openstack_networking_port_v2" "eth2_r11" {
-  name       = "r11_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r1r11.id
 
   fixed_ip {
@@ -218,7 +218,7 @@ resource "openstack_networking_port_v2" "eth2_r11" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r11" {
-  name       = "r11_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r11r4.id
 
   fixed_ip {
@@ -228,7 +228,7 @@ resource "openstack_networking_port_v2" "eth3_r11" {
 }
 
 resource "openstack_networking_port_v2" "eth2_r4" {
-  name       = "r4_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r1r4.id
 
   fixed_ip {
@@ -237,7 +237,7 @@ resource "openstack_networking_port_v2" "eth2_r4" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r4" {
-  name       = "r4_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r11r4.id
 
   fixed_ip {
@@ -246,7 +246,7 @@ resource "openstack_networking_port_v2" "eth3_r4" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r4" {
-  name       = "r4_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r4r6.id
 
   fixed_ip {
@@ -256,7 +256,7 @@ resource "openstack_networking_port_v2" "eth4_r4" {
 }
 
 resource "openstack_networking_port_v2" "eth2_r6" {
-  name       = "r6_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r6r7.id
 
   fixed_ip {
@@ -265,7 +265,7 @@ resource "openstack_networking_port_v2" "eth2_r6" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r6" {
-  name       = "r6_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r5r6.id
 
   fixed_ip {
@@ -274,7 +274,7 @@ resource "openstack_networking_port_v2" "eth3_r6" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r6" {
-  name       = "r6_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r4r6.id
 
   fixed_ip {
@@ -284,7 +284,7 @@ resource "openstack_networking_port_v2" "eth4_r6" {
 }
 
 resource "openstack_networking_port_v2" "eth2_r5" {
-  name       = "r5_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r5r6.id
 
   fixed_ip {
@@ -293,7 +293,7 @@ resource "openstack_networking_port_v2" "eth2_r5" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r5" {
-  name       = "r5_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r2r5.id
 
   fixed_ip {
@@ -303,7 +303,7 @@ resource "openstack_networking_port_v2" "eth3_r5" {
 }
 
 resource "openstack_networking_port_v2" "eth2_r2" {
-  name       = "r2_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r2r12.id
 
   fixed_ip {
@@ -312,7 +312,7 @@ resource "openstack_networking_port_v2" "eth2_r2" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r2" {
-  name       = "r2_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r1r2.id
 
   fixed_ip {
@@ -321,7 +321,7 @@ resource "openstack_networking_port_v2" "eth3_r2" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r2" {
-  name       = "r2_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r2r3.id
 
   fixed_ip {
@@ -330,7 +330,7 @@ resource "openstack_networking_port_v2" "eth4_r2" {
   }
 }
 resource "openstack_networking_port_v2" "eth5_r2" {
-  name       = "r5_eth5"
+  name       = "eth5"
   network_id = data.openstack_networking_network_v2.r2r5.id
 
   fixed_ip {
@@ -341,7 +341,7 @@ resource "openstack_networking_port_v2" "eth5_r2" {
 
 
 resource "openstack_networking_port_v2" "eth2_r3" {
-  name       = "r3_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r3r13.id
 
   fixed_ip {
@@ -350,7 +350,7 @@ resource "openstack_networking_port_v2" "eth2_r3" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r3" {
-  name       = "r3_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r3r7.id
 
   fixed_ip {
@@ -359,7 +359,7 @@ resource "openstack_networking_port_v2" "eth3_r3" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r3" {
-  name       = "r3_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r2r3.id
 
   fixed_ip {
@@ -368,7 +368,7 @@ resource "openstack_networking_port_v2" "eth4_r3" {
   }
 }
 resource "openstack_networking_port_v2" "eth5_r3" {
-  name       = "r3_eth5"
+  name       = "eth5"
   network_id = data.openstack_networking_network_v2.r3r12.id
 
   fixed_ip {
@@ -379,7 +379,7 @@ resource "openstack_networking_port_v2" "eth5_r3" {
 
 
 resource "openstack_networking_port_v2" "eth2_r7" {
-  name       = "r7_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r6r7.id
 
   fixed_ip {
@@ -388,7 +388,7 @@ resource "openstack_networking_port_v2" "eth2_r7" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r7" {
-  name       = "r7_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r7r13.id
 
   fixed_ip {
@@ -397,7 +397,7 @@ resource "openstack_networking_port_v2" "eth3_r7" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r7" {
-  name       = "r7_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r3r7.id
 
   fixed_ip {
@@ -408,7 +408,7 @@ resource "openstack_networking_port_v2" "eth4_r7" {
 
 
 resource "openstack_networking_port_v2" "eth2_r13" {
-  name       = "r13_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r3r13.id
 
   fixed_ip {
@@ -417,7 +417,7 @@ resource "openstack_networking_port_v2" "eth2_r13" {
   }
 }
 resource "openstack_networking_port_v2" "eth3_r13" {
-  name       = "r13_eth3"
+  name       = "eth3"
   network_id = data.openstack_networking_network_v2.r7r13.id
 
   fixed_ip {
@@ -427,7 +427,7 @@ resource "openstack_networking_port_v2" "eth3_r13" {
 }
 
 resource "openstack_networking_port_v2" "eth2_r12" {
-  name       = "r12_eth2"
+  name       = "eth2"
   network_id = data.openstack_networking_network_v2.r2r12.id
 
   fixed_ip {
@@ -436,7 +436,7 @@ resource "openstack_networking_port_v2" "eth2_r12" {
   }
 }
 resource "openstack_networking_port_v2" "eth4_r12" {
-  name       = "r12_eth4"
+  name       = "eth4"
   network_id = data.openstack_networking_network_v2.r3r12.id
 
   fixed_ip {
