@@ -188,6 +188,8 @@ resource "openstack_networking_port_v2" "eth2_r1" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
     ip_address = "192.168.3.1"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r1" {
   name       = "eth3"
@@ -197,6 +199,8 @@ resource "openstack_networking_port_v2" "eth3_r1" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r2.id                
     ip_address = "192.168.4.1"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r1" {
   name       = "eth4"
@@ -206,6 +210,8 @@ resource "openstack_networking_port_v2" "eth4_r1" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
     ip_address = "192.168.1.1"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r11" {
@@ -216,6 +222,8 @@ resource "openstack_networking_port_v2" "eth2_r11" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
     ip_address = "192.168.1.11"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r11" {
   name       = "eth3"
@@ -225,6 +233,8 @@ resource "openstack_networking_port_v2" "eth3_r11" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
     ip_address = "192.168.2.11"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r4" {
@@ -235,6 +245,8 @@ resource "openstack_networking_port_v2" "eth2_r4" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
     ip_address = "192.168.3.4"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r4" {
   name       = "eth3"
@@ -244,6 +256,8 @@ resource "openstack_networking_port_v2" "eth3_r4" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
     ip_address = "192.168.2.4"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r4" {
   name       = "eth4"
@@ -253,6 +267,8 @@ resource "openstack_networking_port_v2" "eth4_r4" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
     ip_address = "192.168.5.4"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r6" {
@@ -263,6 +279,8 @@ resource "openstack_networking_port_v2" "eth2_r6" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r6r7.id                
     ip_address = "192.168.9.6"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r6" {
   name       = "eth3"
@@ -272,6 +290,8 @@ resource "openstack_networking_port_v2" "eth3_r6" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
     ip_address = "192.168.7.6"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r6" {
   name       = "eth4"
@@ -281,6 +301,8 @@ resource "openstack_networking_port_v2" "eth4_r6" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
     ip_address = "192.168.5.6"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r5" {
@@ -291,6 +313,8 @@ resource "openstack_networking_port_v2" "eth2_r5" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
     ip_address = "192.168.7.5"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r5" {
   name       = "eth3"
@@ -300,6 +324,8 @@ resource "openstack_networking_port_v2" "eth3_r5" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r5.id                
     ip_address = "192.168.6.5"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r2" {
@@ -310,6 +336,8 @@ resource "openstack_networking_port_v2" "eth2_r2" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r12.id                
     ip_address = "192.168.13.20"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r2" {
   name       = "eth3"
@@ -319,6 +347,8 @@ resource "openstack_networking_port_v2" "eth3_r2" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r2.id                
     ip_address = "192.168.4.20"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r2" {
   name       = "eth4"
@@ -328,6 +358,8 @@ resource "openstack_networking_port_v2" "eth4_r2" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r3.id                
     ip_address = "192.168.8.20"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth5_r2" {
   name       = "eth5"
@@ -337,6 +369,8 @@ resource "openstack_networking_port_v2" "eth5_r2" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r5.id                
     ip_address = "192.168.6.20"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 
@@ -348,6 +382,8 @@ resource "openstack_networking_port_v2" "eth2_r3" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r13.id                
     ip_address = "192.168.12.3"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r3" {
   name       = "eth3"
@@ -357,6 +393,8 @@ resource "openstack_networking_port_v2" "eth3_r3" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r7.id                
     ip_address = "192.168.10.3"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r3" {
   name       = "eth4"
@@ -366,6 +404,8 @@ resource "openstack_networking_port_v2" "eth4_r3" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r3.id                
     ip_address = "192.168.8.3"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth5_r3" {
   name       = "eth5"
@@ -375,6 +415,8 @@ resource "openstack_networking_port_v2" "eth5_r3" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r12.id                
     ip_address = "192.168.14.3"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 
@@ -386,6 +428,8 @@ resource "openstack_networking_port_v2" "eth2_r7" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r6r7.id                
     ip_address = "192.168.9.7"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r7" {
   name       = "eth3"
@@ -395,6 +439,8 @@ resource "openstack_networking_port_v2" "eth3_r7" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r7r13.id                
     ip_address = "192.168.11.7"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r7" {
   name       = "eth4"
@@ -404,6 +450,8 @@ resource "openstack_networking_port_v2" "eth4_r7" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r7.id                
     ip_address = "192.168.10.7"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 
@@ -415,6 +463,8 @@ resource "openstack_networking_port_v2" "eth2_r13" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r13.id                
     ip_address = "192.168.12.13"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth3_r13" {
   name       = "eth3"
@@ -424,6 +474,8 @@ resource "openstack_networking_port_v2" "eth3_r13" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r7r13.id                
     ip_address = "192.168.11.13"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 resource "openstack_networking_port_v2" "eth2_r12" {
@@ -434,6 +486,8 @@ resource "openstack_networking_port_v2" "eth2_r12" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r12.id                
     ip_address = "192.168.13.12"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 resource "openstack_networking_port_v2" "eth4_r12" {
   name       = "eth4"
@@ -443,6 +497,8 @@ resource "openstack_networking_port_v2" "eth4_r12" {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r12.id                
     ip_address = "192.168.14.12"
   }
+  security_group_ids = []
+  port_security_enabled  = false
 }
 
 # -----------------------
