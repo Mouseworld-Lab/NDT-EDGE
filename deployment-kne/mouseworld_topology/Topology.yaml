@@ -6,7 +6,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r1.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -20,7 +20,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r4.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -34,7 +34,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r5.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -46,7 +46,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r6.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -60,7 +60,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r7.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -74,7 +74,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r2.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth1:
       name: Ethernet1
@@ -92,7 +92,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r3.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -108,7 +108,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r11.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -120,7 +120,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r12.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth2:
       name: Ethernet2
@@ -132,7 +132,7 @@ nodes:
     config_path: /etc/frr
     config_file: frr.conf
     file: /r13.conf
-    image: frr-ubuntu22:grpc
+    image: 192.168.159.18:8030/frr:10.3
   interfaces:
     eth1:
       name: Ethernet1
@@ -145,7 +145,7 @@ nodes:
   config:
     config_path: /home/cognet
     config_file: ddosserver-config.py
-    file: /configuracion/ddosserver-config.py
+    file: /configuration/ddosserver-config.py
     image: javi14t/ddosserver:last
   interfaces:
     eth1:
@@ -155,7 +155,7 @@ nodes:
   config:
     config_path: /home/cognet
     config_file: gateway1-config.py
-    file: /configuracion/gateway1-config.py
+    file: /configuration/gateway1-config.py
     image: javi14t/internet:last
   interfaces:
     eth1:

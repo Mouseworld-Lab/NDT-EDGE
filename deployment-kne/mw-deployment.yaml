@@ -20,12 +20,18 @@
     - name: Deploy topology
       shell: kne create ~/NDT-EDGE/deployment-kne/mouseworld_topology/Topology.yaml # Configure the path where the kne topology file is
 
+#    - name: Delete default
+#      shell: kubectl exec -n 6gndt {{ item }} -- sudo ip route del default
+#      loop: "{{ pods }}"
+#      loop_control:
+#        loop_var: item
 
-    - name: Enable OSPFd in FRR configuration
-      shell: kubectl exec -n 6gndt {{ item }} -- sh -c "sed -i 's/^ospfd=.*/ospfd=yes/' /etc/frr/daemons"
-      loop: "{{ pods }}"
-      loop_control:
-        loop_var: item
+
+#    - name: Enable OSPFd in FRR configuration
+#      shell: kubectl exec -n 6gndt {{ item }} -- sh -c "sed -i 's/^ospfd=.*/ospfd=yes/' /etc/frr/daemons"
+#      loop: "{{ pods }}"
+#      loop_control:
+#        loop_var: item
 
     - name: Restart FRR to apply changes
       shell: kubectl exec -n 6gndt {{ item }} -- sudo /usr/lib/frr/frrinit.sh start
@@ -38,10 +44,10 @@
 
 
     - name: config map
-      shell: kubectl create configmap gateway2-config --from-file=/home/mw/MouseWorld/deployment-kne/mouseworld_topology/configuracion/gateway2-config.py -n 6gndt
+      shell: kubectl create configmap gateway2-config --from-file=/home/mw/NDT-EDGE/deployment-kne/mouseworld_topology/configuration/gateway2-config.py -n 6gndt
 
     - name: Deploy gateway2
-      shell: kubectl apply -f ~/MouseWorld/deployment-kne/mouseworld_topology/pod-gateway2.yaml
+      shell: kubectl apply -f ~/NDT-EDGE/deployment-kne/mouseworld_topology/pod-gateway2.yaml
 
     - name: Wait for 20 seconds
       pause:
