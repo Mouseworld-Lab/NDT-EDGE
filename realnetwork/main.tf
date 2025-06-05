@@ -55,12 +55,12 @@ data "openstack_compute_flavor_v2" "flavor_edge" {
   name = var.flavor_edge
 }
 
+# ----------------------- Redes  -----------------------
 
 data "openstack_networking_network_v2" "mgmt_network" {
   name = var.management-network
 }
 
-# ----------------------- Redes  -----------------------
 data "openstack_networking_network_v2" "r5r6" {
   name = var.r5r6
 }
@@ -121,6 +121,12 @@ data "openstack_networking_network_v2" "r2-gateway" {
   name = var.r2-gateway
 }
 # ----------------------- Subredes  -----------------------
+
+data "openstack_networking_subnet_v2" "subnet_mgmt_network" {
+  name       = "management-subnet"
+  network_id = data.openstack_networking_network_v2.mgmt_network.id
+}
+
 data "openstack_networking_subnet_v2" "subnet_r5r6" {
   name       = "r5r6"
   network_id = data.openstack_networking_network_v2.r5r6.id
@@ -228,6 +234,19 @@ resource "openstack_networking_port_v2" "eth4_r1" {
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
     ip_address = "192.168.1.1"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+
+
+resource "openstack_networking_port_v2" "eth1_r11" {
+  name       = "eth1"
+  network_id = data.openstack_networking_network_v2.mgmt_network.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
+    ip_address = "192.168.27.175"
   }
   security_group_ids = []
   port_security_enabled  = false
@@ -545,6 +564,18 @@ resource "openstack_networking_port_v2" "eth1_gateway" {
   port_security_enabled  = false
 }
 
+
+resource "openstack_networking_port_v2" "ens3_edge" {
+  name       = "ens3"
+  network_id = data.openstack_networking_network_v2.mgmt_network.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
+    ip_address = "192.168.27.185"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
 # -----------------------
 # Instances
 # -----------------------
@@ -708,9 +739,14 @@ resource "openstack_compute_instance_v2" "r11" {
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
   #mgmt
+#  network {
+#    uuid = data.openstack_networking_network_v2.mgmt_network.id
+#  }
+
   network {
-    uuid = data.openstack_networking_network_v2.mgmt_network.id
+    port = openstack_networking_port_v2.eth1_r11.id
   }
+
   #subredes
   network {
     port = openstack_networking_port_v2.eth2_r11.id
@@ -763,9 +799,14 @@ resource "openstack_compute_instance_v2" "edge" {
   flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
 
   #mgmt
+#  network {
+#    uuid = data.openstack_networking_network_v2.mgmt_network.id
+#  }
   network {
-    uuid = data.openstack_networking_network_v2.mgmt_network.id
+    port = openstack_networking_port_v2.ens3_edge.id
   }
+
+
   user_data = file("cloud-init-edge.yml")
 }
 

@@ -21,7 +21,15 @@ timezone: Europe/Madrid
 package_update: true
 package_upgrade: true
 
-runcmd:
+network:
+  version: 1
+  config:
+    - type: physical
+      name: eth1
+      subnets:
+        - type: dhcp
+
+
 runcmd:
   - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /tmp/NDT-EDGE
   - sudo cp /tmp/NDT-EDGE/realnetwork/config/r1.conf /etc/frr/frr.conf
