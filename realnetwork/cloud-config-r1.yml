@@ -28,3 +28,8 @@ runcmd:
   - sudo chown frr:frr /etc/frr/frr.conf
   - sudo rm -rf /tmp/NDT-EDGE
   - sudo /usr/lib/frr/frrinit.sh restart
+  - sudo ip route del default 
+  - sudo ip route add default via 192.168.4.20 dev ens5
+  - sudo ip route add 10.0.2.0/24 via 192.168.1.11 dev ens6
+  - sudo apt-get update
+  - sudo apt-get install -y traceroute

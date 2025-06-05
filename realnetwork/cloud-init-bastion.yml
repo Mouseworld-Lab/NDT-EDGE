@@ -1,0 +1,23 @@
+#cloud-config
+hostname: bastion
+fqdn: bastion
+manage_etc_hosts: True
+
+users:
+  - name: bastion
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    bastion:bastion-ubuntu
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+

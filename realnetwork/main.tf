@@ -18,6 +18,8 @@ provider "openstack" {
 
 variable "image_name"                { default = "HLx-FRR" }
 variable "flavor_name"               { default = "FRR" }
+variable "flavor_edge"               { default = "Edge" }
+variable "image_edge"                { default = "Ubuntu 22.04"}
 variable "management-network"        { default = "management-network" }
 variable "r5r6"          { default = "r5r6" }
 variable "r2r3"          { default = "r2r3" }
@@ -33,22 +35,32 @@ variable "r2r12"         { default = "r2r12" }
 variable "r7r13"         { default = "r7r13" }
 variable "r1r11"         { default = "r1r11" }
 variable "r1r2"          { default = "r1r2" }
-
+variable "r2-gateway"    { default = "r2-gateway" }
+#variable "edge-client"   { default = "edge-client" }
 
 
 data "openstack_images_image_v2" "image" {
   name = var.image_name
 }
 
+data "openstack_images_image_v2" "image_edge" {
+  name = var.image_edge
+}
+
 data "openstack_compute_flavor_v2" "flavor" {
   name = var.flavor_name
 }
+
+data "openstack_compute_flavor_v2" "flavor_edge" {
+  name = var.flavor_edge
+}
+
 
 data "openstack_networking_network_v2" "mgmt_network" {
   name = var.management-network
 }
 
-# ----------------------- Subredes  -----------------------
+# ----------------------- Redes  -----------------------
 data "openstack_networking_network_v2" "r5r6" {
   name = var.r5r6
 }
@@ -105,7 +117,10 @@ data "openstack_networking_network_v2" "r1r2" {
   name = var.r1r2
 }
 
-
+data "openstack_networking_network_v2" "r2-gateway" {
+  name = var.r2-gateway
+}
+# ----------------------- Subredes  -----------------------
 data "openstack_networking_subnet_v2" "subnet_r5r6" {
   name       = "r5r6"
   network_id = data.openstack_networking_network_v2.r5r6.id
@@ -176,6 +191,10 @@ data "openstack_networking_subnet_v2" "subnet_r1r2" {
   network_id = data.openstack_networking_network_v2.r1r2.id
 }
 
+data "openstack_networking_subnet_v2" "subnet_r2-gateway" {
+  name       = "r2-gateway"
+  network_id = data.openstack_networking_network_v2.r2-gateway.id
+}
 
 # ----------------------- Interfaces  -----------------------
 
@@ -323,6 +342,18 @@ resource "openstack_networking_port_v2" "eth3_r5" {
   fixed_ip {
     subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r5.id                
     ip_address = "192.168.6.5"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+
+resource "openstack_networking_port_v2" "eth1_r2" {
+  name       = "eth1"
+  network_id = data.openstack_networking_network_v2.r2-gateway.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r2-gateway.id                
+    ip_address = "192.168.15.20"
   }
   security_group_ids = []
   port_security_enabled  = false
@@ -501,6 +532,19 @@ resource "openstack_networking_port_v2" "eth4_r12" {
   port_security_enabled  = false
 }
 
+
+resource "openstack_networking_port_v2" "eth1_gateway" {
+  name       = "eth1"
+  network_id = data.openstack_networking_network_v2.r2-gateway.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r2-gateway.id                
+    ip_address = "192.168.15.3"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+
 # -----------------------
 # Instances
 # -----------------------
@@ -509,7 +553,6 @@ resource "openstack_compute_instance_v2" "r1" {
   name            = "r1"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -538,6 +581,9 @@ resource "openstack_compute_instance_v2" "r2" {
   }
   #subredes
   network {
+    port = openstack_networking_port_v2.eth1_r2.id
+  }
+  network {
     port = openstack_networking_port_v2.eth2_r2.id
   }
   network {
@@ -556,7 +602,6 @@ resource "openstack_compute_instance_v2" "r3" {
   name            = "r3"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -581,7 +626,6 @@ resource "openstack_compute_instance_v2" "r4" {
   name            = "r4"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -603,7 +647,6 @@ resource "openstack_compute_instance_v2" "r5" {
   name            = "r5"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -622,7 +665,6 @@ resource "openstack_compute_instance_v2" "r6" {
   name            = "r6"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -665,7 +707,6 @@ resource "openstack_compute_instance_v2" "r11" {
   name            = "r11"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -684,7 +725,6 @@ resource "openstack_compute_instance_v2" "r12" {
   name            = "r12"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -703,7 +743,6 @@ resource "openstack_compute_instance_v2" "r13" {
   name            = "r13"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
-
   #mgmt
   network {
     uuid = data.openstack_networking_network_v2.mgmt_network.id
@@ -716,4 +755,33 @@ resource "openstack_compute_instance_v2" "r13" {
     port = openstack_networking_port_v2.eth3_r13.id
   }
   user_data = file("cloud-config-r13.yml")
+}
+
+resource "openstack_compute_instance_v2" "edge" {
+  name            = "edge"
+  image_id        = data.openstack_images_image_v2.image_edge.id
+  flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
+
+  #mgmt
+  network {
+    uuid = data.openstack_networking_network_v2.mgmt_network.id
+  }
+  user_data = file("cloud-init-edge.yml")
+}
+
+
+resource "openstack_compute_instance_v2" "gateway" {
+  name            = "gateway"
+  image_id        = data.openstack_images_image_v2.image.id
+  flavor_id       = data.openstack_compute_flavor_v2.flavor.id
+
+  #mgmt
+  network {
+    uuid = data.openstack_networking_network_v2.mgmt_network.id
+  }
+  #subredes
+  network {
+    port = openstack_networking_port_v2.eth1_gateway.id
+  }
+  user_data = file("cloud-config-gateway.yml")
 }

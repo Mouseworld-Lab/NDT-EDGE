@@ -1,0 +1,31 @@
+#cloud-config
+hostname: gateway
+fqdn: gateway
+manage_etc_hosts: True
+
+users:
+  - name: gateway
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    gateway:gateway-frr
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: trues
+
+runcmd:
+  - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/gateway/NDT-EDGE
+  - sudo cp /home/gateway/NDT-EDGE/realnetwork/config/gateway.conf /etc/frr/frr.conf
+  - sudo chown frr:frr /etc/frr/frr.conf
+  - sudo rm -rf /home/gateway/NDT-EDGE
+  - sudo /usr/lib/frr/frrinit.sh restart
+  - sudo iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+  - sudo ip route add 10.0.2.0/24 via 192.168.15.20 dev ens4
