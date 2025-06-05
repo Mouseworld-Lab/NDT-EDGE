@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client12
+  labels:
+    app: test4
+  annotations:
+    k8s.v1.cni.cncf.io/networks: v-network-2
+spec:
+  containers:
+  - name: client12
+    command: ["/bin/bash", "-c", "ip a add 10.0.2.13/24 dev net1 && ip route del default && ip route add default via 10.0.2.1 dev net1 && trap : TERM INT; sleep infinity & wait"]
+    image: javi14t/cgclient:last
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN"]
+
