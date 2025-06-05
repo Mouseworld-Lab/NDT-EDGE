@@ -34,7 +34,7 @@
 #        loop_var: item
 
     - name: Restart FRR to apply changes
-      shell: kubectl exec -n 6gndt {{ item }} -- sudo /usr/lib/frr/frrinit.sh start
+      shell: kubectl exec -n 6gndt {{ item }} -- /usr/lib/frr/frrinit.sh start &
       loop: "{{ pods }}"
       loop_control:
         loop_var: item

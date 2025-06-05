@@ -1,7 +1,7 @@
 import subprocess
 
-# Comando para agregar la direcci�n IP en la interfaz eth1
-comando_addr = "ip addr add 10.0.80.1/24 dev eth1"
+# Comando para agregar la direcci�n IP en la interfaz ens1
+comando_addr = "ip addr add 10.0.80.1/24 dev ens1"
 subprocess.run(comando_addr, shell=True)
 
 # Definir las rutas a agregar
@@ -27,7 +27,7 @@ rutas = [
 
 # Puerta de enlace y nombre de interfaz comunes para todas las rutas
 puerta_enlace = "10.0.80.2"
-interfaz = "eth1"
+interfaz = "ens1"
 
 #Eliminar y agregar ruta por defecto 
 ruta_por_defecto = "default"
@@ -47,7 +47,7 @@ if resultado.returncode == 0:
 comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace} dev {interfaz}"
 subprocess.run(comando_ruta_por_defecto, shell=True)
 
-# Agregar la direccion IP en eth1
+# Agregar la direccion IP en ens1
 subprocess.run(comando_addr, shell=True)
 
 # Agregar cada ruta utilizando subprocess

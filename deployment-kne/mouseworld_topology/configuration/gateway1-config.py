@@ -1,15 +1,15 @@
 import subprocess
 
-# Comando para agregar la dirección IP en la interfaz eth1
-comando_addr_eth1 = "ip addr add 192.168.15.1/24 dev eth1"
-subprocess.run(comando_addr_eth1, shell=True)
+# Comando para agregar la dirección IP en la interfaz ens1
+comando_addr_ens1 = "ip addr add 192.168.15.1/24 dev ens1"
+subprocess.run(comando_addr_ens1, shell=True)
 
-# Comando para agregar la dirección IP en la interfaz eth2
-comando_addr_eth2 = "ip addr add 12.12.12.2/24 dev eth2"
-subprocess.run(comando_addr_eth2, shell=True)
+# Comando para agregar la dirección IP en la interfaz ens2
+comando_addr_ens2 = "ip addr add 12.12.12.2/24 dev ens2"
+subprocess.run(comando_addr_ens2, shell=True)
 
-# Subredes para eth1
-subredes_eth1 = [
+# Subredes para ens1
+subredes_ens1 = [
     "192.168.1.0/24",
     "192.168.2.0/24",
     "192.168.3.0/24",
@@ -28,16 +28,16 @@ subredes_eth1 = [
     "10.0.81.0/24"
 ]
 
-# Subredes para eth2
-subredes_eth2 = [
+# Subredes para ens2
+subredes_ens2 = [
     "12.12.12.0/24",
     "192.168.159.0/24",
-    # ... (otras subredes para eth2)
+    # ... (otras subredes para ens2)
 ]
 
 # Puerta de enlace común para todas las rutas
-puerta_enlace_eth1 = "192.168.15.2"
-puerta_enlace_eth2 = "12.12.12.1"
+puerta_enlace_ens1 = "192.168.15.20"
+puerta_enlace_ens2 = "12.12.12.1"
 
 #Eliminar y agregar ruta por defecto 
 ruta_por_defecto = "default"
@@ -54,16 +54,16 @@ if resultado.returncode == 0:
     subprocess.run(comando_eliminar_ruta, shell=True)
 
 # Agregar la ruta por defecto
-comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth2} dev eth2"
+comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_ens2} dev ens2"
 subprocess.run(comando_ruta_por_defecto, shell=True)
 
 
-# Agregar las subredes en eth1
-for subred_eth1 in subredes_eth1:
-    comando_subred_eth1 = f"ip route add {subred_eth1} via {puerta_enlace_eth1} dev eth1"
-    subprocess.run(comando_subred_eth1, shell=True)
+# Agregar las subredes en ens1
+for subred_ens1 in subredes_ens1:
+    comando_subred_ens1 = f"ip route add {subred_ens1} via {puerta_enlace_ens1} dev ens1"
+    subprocess.run(comando_subred_ens1, shell=True)
 
-# Agregar las subredes en eth2
-for subred_eth2 in subredes_eth2:
-    comando_subred_eth2 = f"ip route add {subred_eth2} via {puerta_enlace_eth2} dev eth2"
-    subprocess.run(comando_subred_eth2, shell=True)
+# Agregar las subredes en ens2
+for subred_ens2 in subredes_ens2:
+    comando_subred_ens2 = f"ip route add {subred_ens2} via {puerta_enlace_ens2} dev ens2"
+    subprocess.run(comando_subred_ens2, shell=True)

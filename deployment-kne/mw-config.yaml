@@ -21,7 +21,7 @@
       shell: kubectl exec -n 6gndt gateway1 -- python3 gateway1-config.py
 
     - name: Get ddosserver IP
-      shell: "kubectl exec -n 6gndt ddosserver -- ip addr show eth1 | awk '/inet / {gsub(/\\/\\/[0-9]+/, \"\", $2); print $2}'"
+      shell: "kubectl exec -n 6gndt ddosserver -- ip addr show ens1 | awk '/inet / {gsub(/\\/\\/[0-9]+/, \"\", $2); print $2}'"
       register: ddosserver_ip_output
       changed_when: false
       ignore_errors: yes
@@ -44,7 +44,7 @@
   #---------------------------------------internet pod configuration----------------------------------------------------------------------------------------------
       
     - name: Iptables
-      shell: kubectl exec -n 6gndt gateway2 -- /bin/sh -c 'iptables -t nat -A POSTROUTING -o eth2 -j MASQUERADE'
+      shell: kubectl exec -n 6gndt gateway2 -- /bin/sh -c 'iptables -t nat -A POSTROUTING -o ens2 -j MASQUERADE'
       ignore_errors: yes
 
  #---------------------------------------configure micaddy.com ip----------------------------------------------------------------------------------------------   
@@ -61,43 +61,43 @@
 
 #----------------------------------------default routes-----------------------------------
     - name: add default route r1
-      shell: kubectl exec -n 6gndt r1 -- sudo ip route replace default via 192.168.4.2 dev eth3
+      shell: kubectl exec -n 6gndt r1 -- sudo ip route replace default via 192.168.4.20 dev ens5
       ignore_errors: yes
 
     - name: add default route r2
-      shell: kubectl exec -n 6gndt r2 -- sudo ip route replace default via 192.168.15.1 dev eth1
+      shell: kubectl exec -n 6gndt r2 -- sudo ip route replace default via 192.168.15.1 dev ens4
       ignore_errors: yes
 
     - name: add default route r3     
-      shell: kubectl exec -n 6gndt r3 -- sudo ip route replace default via 192.168.8.2 dev eth4
+      shell: kubectl exec -n 6gndt r3 -- sudo ip route replace default via 192.168.8.20 dev ens6
       ignore_errors: yes
 
     - name: add default route r4
-      shell: kubectl exec -n 6gndt r4 -- sudo ip route replace default via 192.168.3.1 dev eth2
+      shell: kubectl exec -n 6gndt r4 -- sudo ip route replace default via 192.168.3.1 dev ens4
       ignore_errors: yes
 
     - name: add default route r5
-      shell: kubectl exec -n 6gndt r5 -- sudo ip route replace default via 192.168.6.2 dev eth3
+      shell: kubectl exec -n 6gndt r5 -- sudo ip route replace default via 192.168.6.2 dev ens5
       ignore_errors: yes
 
     - name: add default route r6
-      shell: kubectl exec -n 6gndt r6 -- sudo ip route replace default via 192.168.7.5 dev eth3
+      shell: kubectl exec -n 6gndt r6 -- sudo ip route replace default via 192.168.7.5 dev ens5
       ignore_errors: yes
 
     - name: add default route r7
-      shell: kubectl exec -n 6gndt r7 -- sudo ip route replace default via 192.168.10.3 dev eth4
+      shell: kubectl exec -n 6gndt r7 -- sudo ip route replace default via 192.168.10.3 dev ens6
       ignore_errors: yes
 
     - name: add default route r11
-      shell: kubectl exec -n 6gndt r11 -- sudo ip route replace default via 192.168.1.1 dev eth2
+      shell: kubectl exec -n 6gndt r11 -- sudo ip route replace default via 192.168.1.1 dev ens4
       ignore_errors: yes
 
     - name: add default route r12
-      shell: kubectl exec -n 6gndt r12 -- sudo ip route replace default via 192.168.13.2 dev eth2
+      shell: kubectl exec -n 6gndt r12 -- sudo ip route replace default via 192.168.13.2 dev ens4
       ignore_errors: yes
 
     - name: add default route r13
-      shell: kubectl exec -n 6gndt r13 -- sudo ip route replace default via 192.168.12.3 dev eth2
+      shell: kubectl exec -n 6gndt r13 -- sudo ip route replace default via 192.168.12.3 dev ens4
       ignore_errors: yes
 
 
@@ -106,67 +106,67 @@
     # - name: Start dumps
     #   shell: kubectl exec -n 6gndt {{ item.pod }} -- tcpdump -i {{ item.interface }} -w /home/{{ item.pod }}_{{ item.interface }}.pcap
     #   loop:
-    #     - { pod: "ceos11", interface: "eth4" }
-    #     - { pod: "ceos11", interface: "eth1" }
-    #     - { pod: "ceos11", interface: "eth2" }
-    #     - { pod: "ceos11", interface: "eth3" }
-    #     - { pod: "ceos11", interface: "eth5" }
-    #     - { pod: "ceos11", interface: "eth6" }
-    #     - { pod: "ceos11", interface: "eth7" }
-    #     - { pod: "ceos11", interface: "eth8" }
-    #     - { pod: "ceos11", interface: "eth9" }
-    #     - { pod: "ceos11", interface: "eth10" }
-    #     - { pod: "ceos11", interface: "eth11" }
-    #     - { pod: "ceos11", interface: "eth12" }
-    #     - { pod: "ceos11", interface: "eth13" }
-    #     - { pod: "ceos11", interface: "eth14" }
-    #     - { pod: "ceos11", interface: "eth15" }
-    #     - { pod: "ceos11", interface: "eth16" }
-    #     - { pod: "ceos11", interface: "eth17" }
-    #     - { pod: "ceos11", interface: "eth18" }
-    #     - { pod: "ceos11", interface: "eth19" }
-    #     - { pod: "ceos11", interface: "eth20" }
-    #     - { pod: "ceos11", interface: "eth21" }
-    #     - { pod: "ceos11", interface: "eth22" }
-    #     - { pod: "ceos11", interface: "eth23" }
-    #     - { pod: "ceos13", interface: "eth1" }
-    #     - { pod: "ceos13", interface: "eth2" }
-    #     - { pod: "ceos13", interface: "eth3" }
-    #     - { pod: "ceos13", interface: "eth4" }
-    #     - { pod: "ceos13", interface: "eth5" }
-    #     - { pod: "ceos13", interface: "eth6" }
-    #     - { pod: "ceos13", interface: "eth7" }
-    #     - { pod: "ceos13", interface: "eth8" }
-    #     - { pod: "ceos13", interface: "eth9" }
-    #     - { pod: "ceos13", interface: "eth10" }
-    #     - { pod: "ceos13", interface: "eth11" }
-    #     - { pod: "ceos1", interface: "eth2" }
-    #     - { pod: "ceos1", interface: "eth3" }
-    #     - { pod: "ceos1", interface: "eth4" }
-    #     - { pod: "ceos1", interface: "eth5" }
-    #     - { pod: "ceos2", interface: "eth1" }
-    #     - { pod: "ceos2", interface: "eth2" }
-    #     - { pod: "ceos2", interface: "eth3" }
-    #     - { pod: "ceos2", interface: "eth4" }
-    #     - { pod: "ceos2", interface: "eth5" }
-    #     - { pod: "ceos3", interface: "eth1" }
-    #     - { pod: "ceos3", interface: "eth2" }
-    #     - { pod: "ceos3", interface: "eth3" }
-    #     - { pod: "ceos3", interface: "eth4" }
-    #     - { pod: "ceos3", interface: "eth5" }
-    #     - { pod: "ceos4", interface: "eth2" }
-    #     - { pod: "ceos4", interface: "eth3" }
-    #     - { pod: "ceos4", interface: "eth4" }
-    #     - { pod: "ceos6", interface: "eth2" }
-    #     - { pod: "ceos6", interface: "eth3" }
-    #     - { pod: "ceos6", interface: "eth4" }
-    #     - { pod: "ceos5", interface: "eth2" }
-    #     - { pod: "ceos5", interface: "eth3" }
-    #     - { pod: "ceos7", interface: "eth2" }
-    #     - { pod: "ceos7", interface: "eth3" }
-    #     - { pod: "ceos7", interface: "eth4" }
-    #     - { pod: "ceos12", interface: "eth2" }
-    #     - { pod: "ceos12", interface: "eth4" }
+    #     - { pod: "ceos11", interface: "ens4" }
+    #     - { pod: "ceos11", interface: "ens1" }
+    #     - { pod: "ceos11", interface: "ens2" }
+    #     - { pod: "ceos11", interface: "ens3" }
+    #     - { pod: "ceos11", interface: "ens5" }
+    #     - { pod: "ceos11", interface: "ens6" }
+    #     - { pod: "ceos11", interface: "ens7" }
+    #     - { pod: "ceos11", interface: "ens8" }
+    #     - { pod: "ceos11", interface: "ens9" }
+    #     - { pod: "ceos11", interface: "ens10" }
+    #     - { pod: "ceos11", interface: "ens11" }
+    #     - { pod: "ceos11", interface: "ens12" }
+    #     - { pod: "ceos11", interface: "ens13" }
+    #     - { pod: "ceos11", interface: "ens14" }
+    #     - { pod: "ceos11", interface: "ens15" }
+    #     - { pod: "ceos11", interface: "ens16" }
+    #     - { pod: "ceos11", interface: "ens17" }
+    #     - { pod: "ceos11", interface: "ens18" }
+    #     - { pod: "ceos11", interface: "ens19" }
+    #     - { pod: "ceos11", interface: "ens20" }
+    #     - { pod: "ceos11", interface: "ens21" }
+    #     - { pod: "ceos11", interface: "ens22" }
+    #     - { pod: "ceos11", interface: "ens23" }
+    #     - { pod: "ceos13", interface: "ens1" }
+    #     - { pod: "ceos13", interface: "ens2" }
+    #     - { pod: "ceos13", interface: "ens3" }
+    #     - { pod: "ceos13", interface: "ens4" }
+    #     - { pod: "ceos13", interface: "ens5" }
+    #     - { pod: "ceos13", interface: "ens6" }
+    #     - { pod: "ceos13", interface: "ens7" }
+    #     - { pod: "ceos13", interface: "ens8" }
+    #     - { pod: "ceos13", interface: "ens9" }
+    #     - { pod: "ceos13", interface: "ens10" }
+    #     - { pod: "ceos13", interface: "ens11" }
+    #     - { pod: "ceos1", interface: "ens2" }
+    #     - { pod: "ceos1", interface: "ens3" }
+    #     - { pod: "ceos1", interface: "ens4" }
+    #     - { pod: "ceos1", interface: "ens5" }
+    #     - { pod: "ceos2", interface: "ens1" }
+    #     - { pod: "ceos2", interface: "ens2" }
+    #     - { pod: "ceos2", interface: "ens3" }
+    #     - { pod: "ceos2", interface: "ens4" }
+    #     - { pod: "ceos2", interface: "ens5" }
+    #     - { pod: "ceos3", interface: "ens1" }
+    #     - { pod: "ceos3", interface: "ens2" }
+    #     - { pod: "ceos3", interface: "ens3" }
+    #     - { pod: "ceos3", interface: "ens4" }
+    #     - { pod: "ceos3", interface: "ens5" }
+    #     - { pod: "ceos4", interface: "ens2" }
+    #     - { pod: "ceos4", interface: "ens3" }
+    #     - { pod: "ceos4", interface: "ens4" }
+    #     - { pod: "ceos6", interface: "ens2" }
+    #     - { pod: "ceos6", interface: "ens3" }
+    #     - { pod: "ceos6", interface: "ens4" }
+    #     - { pod: "ceos5", interface: "ens2" }
+    #     - { pod: "ceos5", interface: "ens3" }
+    #     - { pod: "ceos7", interface: "ens2" }
+    #     - { pod: "ceos7", interface: "ens3" }
+    #     - { pod: "ceos7", interface: "ens4" }
+    #     - { pod: "ceos12", interface: "ens2" }
+    #     - { pod: "ceos12", interface: "ens4" }
     #   async: 3600
     #   poll: 0
 

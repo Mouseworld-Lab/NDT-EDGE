@@ -8,12 +8,12 @@ nodes:
     file: /r1.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
+    ens5:
+      name: Ethernet5
+    ens6:
+      name: Ethernet6
 - name: r4
   vendor: HOST
   config:
@@ -22,12 +22,12 @@ nodes:
     file: /r4.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
+    ens5:
+      name: Ethernet5
+    ens6:
+      name: Ethernet6
 - name: r5
   vendor: HOST
   config:
@@ -36,10 +36,10 @@ nodes:
     file: /r5.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
+    ens4:
+      name: Ethernet4
+    ens5:
+      name: Ethernet5
 - name: r6
   vendor: HOST
   config:
@@ -48,12 +48,12 @@ nodes:
     file: /r6.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
+    ens5:
+      name: Ethernet5
+    ens6:
+      name: Ethernet6
 - name: r7
   vendor: HOST
   config:
@@ -62,12 +62,12 @@ nodes:
     file: /r7.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
+    ens5:
+      name: Ethernet5
+    ens6:
+      name: Ethernet6
 - name: r2
   vendor: HOST
   config:
@@ -76,16 +76,16 @@ nodes:
     file: /r2.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth1:
-      name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
-    eth5:
+    ens5:
       name: Ethernet5
+    ens6:
+      name: Ethernet6
+    ens7:
+      name: Ethernet7
+    ens8:
+      name: Ethernet8
 - name: r3
   vendor: HOST
   config:
@@ -94,14 +94,14 @@ nodes:
     file: /r3.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
-    eth4:
+    ens4:
       name: Ethernet4
-    eth5:
+    ens5:
       name: Ethernet5
+    ens6:
+      name: Ethernet6
+    ens7:
+      name: Ethernet7
 - name: r11
   vendor: HOST
   config:
@@ -110,10 +110,10 @@ nodes:
     file: /r11.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
+    ens4:
+      name: Ethernet4
+    ens5:
+      name: Ethernet5
 - name: r12
   vendor: HOST
   config:
@@ -122,10 +122,10 @@ nodes:
     file: /r12.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth2:
-      name: Ethernet2
-    eth4:
+    ens4:
       name: Ethernet4
+    ens5:
+      name: Ethernet5
 - name: r13
   vendor: HOST
   config:
@@ -134,12 +134,12 @@ nodes:
     file: /r13.conf
     image: 192.168.159.18:8030/frr:10.3
   interfaces:
-    eth1:
+    ens1:
       name: Ethernet1
-    eth2:
-      name: Ethernet2
-    eth3:
-      name: Ethernet3
+    ens4:
+      name: Ethernet4
+    ens5:
+      name: Ethernet5
 - name: ddosserver
   vendor: HOST
   config:
@@ -148,7 +148,7 @@ nodes:
     file: /configuration/ddosserver-config.py
     image: javi14t/ddosserver:last
   interfaces:
-    eth1:
+    ens1:
       name: Ethernet1
 - name: gateway1
   vendor: HOST
@@ -158,71 +158,71 @@ nodes:
     file: /configuration/gateway1-config.py
     image: javi14t/internet:last
   interfaces:
-    eth1:
+    ens1:
       name: Ethernet1
 links:
 - a_node: r4
-  a_int: eth2
+  a_int: ens4
   z_node: r1
-  z_int: eth2
+  z_int: ens4
 - a_node: r5
-  a_int: eth3
+  a_int: ens5
   z_node: r2
-  z_int: eth5
+  z_int: ens8
 - a_node: r6
-  a_int: eth3
+  a_int: ens5
   z_node: r5
-  z_int: eth2
+  z_int: ens4
 - a_node: r6
-  a_int: eth4
+  a_int: ens6
   z_node: r4
-  z_int: eth4
+  z_int: ens6
 - a_node: r7
-  a_int: eth2
+  a_int: ens4
   z_node: r6
-  z_int: eth2
+  z_int: ens4
 - a_node: r7
-  a_int: eth4
+  a_int: ens6
   z_node: r3
-  z_int: eth3
+  z_int: ens5
 - a_node: r2
-  a_int: eth3
+  a_int: ens6
   z_node: r1
-  z_int: eth3
+  z_int: ens5
 - a_node: r3
-  a_int: eth4
+  a_int: ens6
   z_node: r2
-  z_int: eth4
+  z_int: ens7
 - a_node: r11
-  a_int: eth2
+  a_int: ens4
   z_node: r1
-  z_int: eth4
+  z_int: ens6
 - a_node: r11
-  a_int: eth3
+  a_int: ens5
   z_node: r4
-  z_int: eth3
+  z_int: ens5
 - a_node: r12
-  a_int: eth2
+  a_int: ens4
   z_node: r2
-  z_int: eth2
+  z_int: ens5
 - a_node: r12
-  a_int: eth4
+  a_int: ens5
   z_node: r3
-  z_int: eth5
+  z_int: ens7
 - a_node: r13
-  a_int: eth1
+  a_int: ens1
   z_node: ddosserver
-  z_int: eth1
+  z_int: ens1
 - a_node: r13
-  a_int: eth2
+  a_int: ens4
   z_node: r3
-  z_int: eth2
+  z_int: ens4
 - a_node: r13
-  a_int: eth3
+  a_int: ens5
   z_node: r7
-  z_int: eth3
+  z_int: ens5
 - a_node: gateway1
-  a_int: eth1
+  a_int: ens1
   z_node: r2
-  z_int: eth1
+  z_int: ens4
 

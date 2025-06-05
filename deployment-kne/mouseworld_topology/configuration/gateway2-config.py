@@ -23,8 +23,8 @@ rutas = [
 
 # Puerta de enlace y nombre de interfaz comunes para todas las rutas
 puerta_enlace = "12.12.12.2"
-puerta_enlace_eth2 = "192.168.159.1"
-interfaz = "eth1"
+puerta_enlace_ens2 = "192.168.159.1"
+interfaz = "ens1"
 
 
 #Eliminar y agregar ruta por defecto 
@@ -42,7 +42,7 @@ if resultado.returncode == 0:
     subprocess.run(comando_eliminar_ruta, shell=True)
 
 # Agregar la ruta por defecto
-comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth2} dev eth2"
+comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_ens2} dev ens2"
 subprocess.run(comando_ruta_por_defecto, shell=True)
 
 
