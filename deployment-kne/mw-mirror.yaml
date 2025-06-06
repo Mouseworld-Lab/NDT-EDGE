@@ -19,15 +19,15 @@
 
     - name: Start mirror frr
       shell: |
-        kubectl exec -n 6gndt r2 -- /bin/bash -c 'tc qdisc add dev eth3 ingress &&
-        tc filter add dev eth3 parent ffff: protocol all u32 match u8 0 0 action mirred egress mirror dev eth6 &&
-        tc qdisc add dev eth3 handle 1: root prio &&
-        tc filter add dev eth3 parent 1: protocol all u32 match u8 0 0 action mirred egress mirror dev eth6'
+        kubectl exec -n 6gndt r2 -- /bin/sh -c 'tc qdisc add dev ens6 ingress &&
+        tc filter add dev ens6 parent ffff: protocol all u32 match u8 0 0 action mirred egress mirror dev eth9 &&
+        tc qdisc add dev ens6 handle 1: root prio &&
+        tc filter add dev ens6 parent 1: protocol all u32 match u8 0 0 action mirred egress mirror dev eth9'
       ignore_errors: yes
 
     - name: Start mirror
       shell: |
-        kubectl exec -n 6gndt mirror -- /bin/sh -c 'tc qdisc add dev eth1 ingress &&
+        kubectl exec -n 6gndt test -- /bin/sh -c 'tc qdisc add dev eth1 ingress &&
         tc filter add dev eth1 parent ffff: protocol all u32 match u8 0 0 action mirred egress mirror dev eth2 &&
         tc qdisc add dev eth1 handle 1: root prio &&
         tc filter add dev eth1 parent 1: protocol all u32 match u8 0 0 action mirred egress mirror dev eth2'

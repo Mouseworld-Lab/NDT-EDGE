@@ -4,25 +4,25 @@ items:
 - apiVersion: networkop.co.uk/v1beta1
   kind: Topology
   metadata:
-    name: mirror
+    name: test
     namespace: 6gndt
   spec:
     links:
     - uid: 1
       peer_pod: r2
-      local_intf: ens1
+      local_intf: eth1
       local_ip: 14.0.0.1/24
-      peer_intf: ens6
+      peer_intf: eth9
       peer_ip: 14.0.0.2/24
     - uid: 2
       peer_pod: localhost
-      local_intf: ens2
+      local_intf: eth2
       #local_ip: 
       peer_intf: mirror
 - apiVersion: v1
   kind: Pod
   metadata:
-    name:  mirror
+    name:  test
     namespace: 6gndt
   spec:
     containers:
