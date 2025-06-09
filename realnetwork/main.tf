@@ -573,6 +573,19 @@ resource "openstack_networking_port_v2" "ens3_edge" {
   port_security_enabled  = false
 }
 
+# ----------------------- edge-kne  -----------------------
+resource "openstack_networking_port_v2" "ens3_edge_kne" {
+  name       = "ens3"
+  network_id = data.openstack_networking_network_v2.mgmt_network.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
+    ip_address = "192.168.27.186"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+
 
 # -----------------------
 # Instances
@@ -796,10 +809,6 @@ resource "openstack_compute_instance_v2" "edge" {
   image_id        = data.openstack_images_image_v2.image_edge.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
 
-  #mgmt
-#  network {
-#    uuid = data.openstack_networking_network_v2.mgmt_network.id
-#  }
   network {
     port = openstack_networking_port_v2.ens3_edge.id
   }
@@ -823,4 +832,17 @@ resource "openstack_compute_instance_v2" "gateway" {
     port = openstack_networking_port_v2.ens4_gateway.id
   }
   user_data = file("cloud-config-gateway.yml")
+}
+
+resource "openstack_compute_instance_v2" "edge_kne" {
+  name            = "edge_kne"
+  image_id        = data.openstack_images_image_v2.image_edge.id
+  flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
+
+  network {
+    port = openstack_networking_port_v2.ens3_edge_kne.id
+  }
+
+
+  user_data = file("cloud-init-edge-kne.yml")
 }

@@ -49,6 +49,11 @@
     - name: Deploy gateway2
       shell: kubectl apply -f ~/NDT-EDGE/deployment-kne/mouseworld_topology/pod-gateway2.yaml
 
+    - name: config map edgecon
+      shell: kubectl create configmap edgecon-config --from-file=/home/mw/NDT-EDGE/deployment-kne/mouseworld_topology/configuration/edgecon-config.py -n 6gndt
+
+    - name: Deploy edgecon
+      shell: kubectl apply -f ~/NDT-EDGE/deployment-kne/mouseworld_topology/pod-edgecon.yaml
     - name: Wait for 20 seconds
       pause:
         seconds: 20
