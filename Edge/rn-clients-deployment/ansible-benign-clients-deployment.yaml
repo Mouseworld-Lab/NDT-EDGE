@@ -6,7 +6,7 @@
   tasks:
 #---------------------------------clients-deployment---------------------------------------------------------------------------------------
     - name: deploy
-      shell: microk8s kubectl apply -f /home/edge/rn-clients-deployment/clients-conf/ -n default
+      shell: microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/rn-clients-deployment/clients-conf/ -n default
       async: 3600
       poll: 0
 
@@ -144,6 +144,6 @@
 #---------------------------------clients-undeployment---------------------------------------------------------------------------------------
 
     - name: delete
-      shell: microk8s kubectl delete -f /home/edge/rn-clients-deployment/clients-conf/ -n default
+      shell: microk8s kubectl delete -f /home/edge/NDT-EDGE/Edge/rn-clients-deployment/clients-conf/ -n default
       async: 3600
       poll: 0
