@@ -18,7 +18,7 @@ provider "openstack" {
 
 variable "image_name"                { default = "HLx-FRR" }
 variable "flavor_name"               { default = "FRR" }
-variable "flavor_edge"               { default = "Edge" }
+variable "flavor_edge"               { default = "Edgev3" }
 variable "image_edge"                { default = "Ubuntu 22.04"}
 variable "management-network"        { default = "management-network" }
 variable "r5r6"          { default = "r5r6" }
@@ -205,8 +205,8 @@ data "openstack_networking_subnet_v2" "subnet_r2-gateway" {
 # ----------------------- Interfaces  -----------------------
 
 
-resource "openstack_networking_port_v2" "eth2_r1" {
-  name       = "eth2"
+resource "openstack_networking_port_v2" "ens4_r1" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r1r4.id
 
   fixed_ip {
@@ -216,8 +216,8 @@ resource "openstack_networking_port_v2" "eth2_r1" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth3_r1" {
-  name       = "eth3"
+resource "openstack_networking_port_v2" "ens5_r1" {
+  name       = "ens5"
   network_id = data.openstack_networking_network_v2.r1r2.id
 
   fixed_ip {
@@ -227,8 +227,8 @@ resource "openstack_networking_port_v2" "eth3_r1" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth4_r1" {
-  name       = "eth4"
+resource "openstack_networking_port_v2" "ens6_r1" {
+  name       = "ens6"
   network_id = data.openstack_networking_network_v2.r1r11.id
 
   fixed_ip {
@@ -238,136 +238,9 @@ resource "openstack_networking_port_v2" "eth4_r1" {
   security_group_ids = []
   port_security_enabled  = false
 }
-
-
-resource "openstack_networking_port_v2" "eth1_r11" {
-  name       = "eth1"
-  network_id = data.openstack_networking_network_v2.mgmt_network.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
-    ip_address = "192.168.27.175"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-
-resource "openstack_networking_port_v2" "eth2_r11" {
-  name       = "eth2"
-  network_id = data.openstack_networking_network_v2.r1r11.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
-    ip_address = "192.168.1.11"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth3_r11" {
-  name       = "eth3"
-  network_id = data.openstack_networking_network_v2.r11r4.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
-    ip_address = "192.168.2.11"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-
-resource "openstack_networking_port_v2" "eth2_r4" {
-  name       = "eth2"
-  network_id = data.openstack_networking_network_v2.r1r4.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
-    ip_address = "192.168.3.4"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth3_r4" {
-  name       = "eth3"
-  network_id = data.openstack_networking_network_v2.r11r4.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
-    ip_address = "192.168.2.4"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth4_r4" {
-  name       = "eth4"
-  network_id = data.openstack_networking_network_v2.r4r6.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
-    ip_address = "192.168.5.4"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-
-resource "openstack_networking_port_v2" "eth2_r6" {
-  name       = "eth2"
-  network_id = data.openstack_networking_network_v2.r6r7.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r6r7.id                
-    ip_address = "192.168.9.6"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth3_r6" {
-  name       = "eth3"
-  network_id = data.openstack_networking_network_v2.r5r6.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
-    ip_address = "192.168.7.6"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth4_r6" {
-  name       = "eth4"
-  network_id = data.openstack_networking_network_v2.r4r6.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
-    ip_address = "192.168.5.6"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-
-resource "openstack_networking_port_v2" "eth2_r5" {
-  name       = "eth2"
-  network_id = data.openstack_networking_network_v2.r5r6.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
-    ip_address = "192.168.7.5"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-resource "openstack_networking_port_v2" "eth3_r5" {
-  name       = "eth3"
-  network_id = data.openstack_networking_network_v2.r2r5.id
-
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r5.id                
-    ip_address = "192.168.6.5"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
-
-resource "openstack_networking_port_v2" "eth1_r2" {
-  name       = "eth1"
+# ----------------------- r2  -----------------------
+resource "openstack_networking_port_v2" "ens4_r2" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r2-gateway.id
 
   fixed_ip {
@@ -377,9 +250,8 @@ resource "openstack_networking_port_v2" "eth1_r2" {
   security_group_ids = []
   port_security_enabled  = false
 }
-
-resource "openstack_networking_port_v2" "eth2_r2" {
-  name       = "eth2"
+resource "openstack_networking_port_v2" "ens5_r2" {
+  name       = "ens5"
   network_id = data.openstack_networking_network_v2.r2r12.id
 
   fixed_ip {
@@ -389,8 +261,8 @@ resource "openstack_networking_port_v2" "eth2_r2" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth3_r2" {
-  name       = "eth3"
+resource "openstack_networking_port_v2" "ens6_r2" {
+  name       = "ens6"
   network_id = data.openstack_networking_network_v2.r1r2.id
 
   fixed_ip {
@@ -400,8 +272,8 @@ resource "openstack_networking_port_v2" "eth3_r2" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth4_r2" {
-  name       = "eth4"
+resource "openstack_networking_port_v2" "ens7_r2" {
+  name       = "ens7"
   network_id = data.openstack_networking_network_v2.r2r3.id
 
   fixed_ip {
@@ -411,8 +283,8 @@ resource "openstack_networking_port_v2" "eth4_r2" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth5_r2" {
-  name       = "eth5"
+resource "openstack_networking_port_v2" "ens8_r2" {
+  name       = "ens8"
   network_id = data.openstack_networking_network_v2.r2r5.id
 
   fixed_ip {
@@ -422,10 +294,9 @@ resource "openstack_networking_port_v2" "eth5_r2" {
   security_group_ids = []
   port_security_enabled  = false
 }
-
-
-resource "openstack_networking_port_v2" "eth2_r3" {
-  name       = "eth2"
+# ----------------------- r3  -----------------------
+resource "openstack_networking_port_v2" "ens4_r3" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r3r13.id
 
   fixed_ip {
@@ -435,8 +306,8 @@ resource "openstack_networking_port_v2" "eth2_r3" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth3_r3" {
-  name       = "eth3"
+resource "openstack_networking_port_v2" "ens5_r3" {
+  name       = "ens5"
   network_id = data.openstack_networking_network_v2.r3r7.id
 
   fixed_ip {
@@ -446,8 +317,8 @@ resource "openstack_networking_port_v2" "eth3_r3" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth4_r3" {
-  name       = "eth4"
+resource "openstack_networking_port_v2" "ens6_r3" {
+  name       = "ens6"
   network_id = data.openstack_networking_network_v2.r2r3.id
 
   fixed_ip {
@@ -457,8 +328,8 @@ resource "openstack_networking_port_v2" "eth4_r3" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth5_r3" {
-  name       = "eth5"
+resource "openstack_networking_port_v2" "ens7_r3" {
+  name       = "ens7"
   network_id = data.openstack_networking_network_v2.r3r12.id
 
   fixed_ip {
@@ -468,10 +339,102 @@ resource "openstack_networking_port_v2" "eth5_r3" {
   security_group_ids = []
   port_security_enabled  = false
 }
+# ----------------------- r4  -----------------------
 
+resource "openstack_networking_port_v2" "ens4_r4" {
+  name       = "ens4"
+  network_id = data.openstack_networking_network_v2.r1r4.id
 
-resource "openstack_networking_port_v2" "eth2_r7" {
-  name       = "eth2"
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r4.id                
+    ip_address = "192.168.3.4"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens5_r4" {
+  name       = "ens5"
+  network_id = data.openstack_networking_network_v2.r11r4.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
+    ip_address = "192.168.2.4"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens6_r4" {
+  name       = "ens6"
+  network_id = data.openstack_networking_network_v2.r4r6.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
+    ip_address = "192.168.5.4"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+# ----------------------- r5  -----------------------
+
+resource "openstack_networking_port_v2" "ens4_r5" {
+  name       = "ens4"
+  network_id = data.openstack_networking_network_v2.r5r6.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
+    ip_address = "192.168.7.5"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens5_r5" {
+  name       = "ens5"
+  network_id = data.openstack_networking_network_v2.r2r5.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r2r5.id                
+    ip_address = "192.168.6.5"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+# ----------------------- r6  -----------------------
+resource "openstack_networking_port_v2" "ens4_r6" {
+  name       = "ens4"
+  network_id = data.openstack_networking_network_v2.r6r7.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r6r7.id                
+    ip_address = "192.168.9.6"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens5_r6" {
+  name       = "ens5"
+  network_id = data.openstack_networking_network_v2.r5r6.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r5r6.id                
+    ip_address = "192.168.7.6"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens6_r6" {
+  name       = "ens6"
+  network_id = data.openstack_networking_network_v2.r4r6.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r4r6.id                
+    ip_address = "192.168.5.6"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+# ----------------------- r7  -----------------------
+resource "openstack_networking_port_v2" "ens4_r7" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r6r7.id
 
   fixed_ip {
@@ -481,8 +444,8 @@ resource "openstack_networking_port_v2" "eth2_r7" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth3_r7" {
-  name       = "eth3"
+resource "openstack_networking_port_v2" "ens5_r7" {
+  name       = "ens5"
   network_id = data.openstack_networking_network_v2.r7r13.id
 
   fixed_ip {
@@ -492,8 +455,8 @@ resource "openstack_networking_port_v2" "eth3_r7" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth4_r7" {
-  name       = "eth4"
+resource "openstack_networking_port_v2" "ens6_r7" {
+  name       = "ens6"
   network_id = data.openstack_networking_network_v2.r3r7.id
 
   fixed_ip {
@@ -503,33 +466,44 @@ resource "openstack_networking_port_v2" "eth4_r7" {
   security_group_ids = []
   port_security_enabled  = false
 }
+# ----------------------- r11  -----------------------
 
-
-resource "openstack_networking_port_v2" "eth2_r13" {
-  name       = "eth2"
-  network_id = data.openstack_networking_network_v2.r3r13.id
+resource "openstack_networking_port_v2" "ens3_r11" {
+  name       = "ens3"
+  network_id = data.openstack_networking_network_v2.mgmt_network.id
 
   fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r13.id                
-    ip_address = "192.168.12.13"
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
+    ip_address = "192.168.27.175"
   }
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth3_r13" {
-  name       = "eth3"
-  network_id = data.openstack_networking_network_v2.r7r13.id
+resource "openstack_networking_port_v2" "ens4_r11" {
+  name       = "ens4"
+  network_id = data.openstack_networking_network_v2.r1r11.id
 
   fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_r7r13.id                
-    ip_address = "192.168.11.13"
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r1r11.id                
+    ip_address = "192.168.1.11"
   }
   security_group_ids = []
   port_security_enabled  = false
 }
+resource "openstack_networking_port_v2" "ens5_r11" {
+  name       = "ens5"
+  network_id = data.openstack_networking_network_v2.r11r4.id
 
-resource "openstack_networking_port_v2" "eth2_r12" {
-  name       = "eth2"
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r11r4.id                
+    ip_address = "192.168.2.11"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+# ----------------------- r12 -----------------------
+resource "openstack_networking_port_v2" "ens4_r12" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r2r12.id
 
   fixed_ip {
@@ -539,8 +513,8 @@ resource "openstack_networking_port_v2" "eth2_r12" {
   security_group_ids = []
   port_security_enabled  = false
 }
-resource "openstack_networking_port_v2" "eth4_r12" {
-  name       = "eth4"
+resource "openstack_networking_port_v2" "ens5_r12" {
+  name       = "ens5"
   network_id = data.openstack_networking_network_v2.r3r12.id
 
   fixed_ip {
@@ -550,10 +524,33 @@ resource "openstack_networking_port_v2" "eth4_r12" {
   security_group_ids = []
   port_security_enabled  = false
 }
+# ----------------------- r13  -----------------------
 
+resource "openstack_networking_port_v2" "ens4_r13" {
+  name       = "ens4"
+  network_id = data.openstack_networking_network_v2.r3r13.id
 
-resource "openstack_networking_port_v2" "eth1_gateway" {
-  name       = "eth1"
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r3r13.id                
+    ip_address = "192.168.12.13"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+resource "openstack_networking_port_v2" "ens5_r13" {
+  name       = "ens5"
+  network_id = data.openstack_networking_network_v2.r7r13.id
+
+  fixed_ip {
+    subnet_id  = data.openstack_networking_subnet_v2.subnet_r7r13.id                
+    ip_address = "192.168.11.13"
+  }
+  security_group_ids = []
+  port_security_enabled  = false
+}
+# ----------------------- gateway  -----------------------
+resource "openstack_networking_port_v2" "ens4_gateway" {
+  name       = "ens4"
   network_id = data.openstack_networking_network_v2.r2-gateway.id
 
   fixed_ip {
@@ -563,8 +560,7 @@ resource "openstack_networking_port_v2" "eth1_gateway" {
   security_group_ids = []
   port_security_enabled  = false
 }
-
-
+# ----------------------- edge  -----------------------
 resource "openstack_networking_port_v2" "ens3_edge" {
   name       = "ens3"
   network_id = data.openstack_networking_network_v2.mgmt_network.id
@@ -576,6 +572,8 @@ resource "openstack_networking_port_v2" "ens3_edge" {
   security_group_ids = []
   port_security_enabled  = false
 }
+
+
 # -----------------------
 # Instances
 # -----------------------
@@ -590,13 +588,13 @@ resource "openstack_compute_instance_v2" "r1" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r1.id
+    port = openstack_networking_port_v2.ens4_r1.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r1.id
+    port = openstack_networking_port_v2.ens5_r1.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r1.id
+    port = openstack_networking_port_v2.ens6_r1.id
   }
   user_data = file("cloud-config-r1.yml")
 }
@@ -612,19 +610,19 @@ resource "openstack_compute_instance_v2" "r2" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth1_r2.id
+    port = openstack_networking_port_v2.ens4_r2.id
   }
   network {
-    port = openstack_networking_port_v2.eth2_r2.id
+    port = openstack_networking_port_v2.ens5_r2.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r2.id
+    port = openstack_networking_port_v2.ens6_r2.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r2.id
+    port = openstack_networking_port_v2.ens7_r2.id
   }
   network {
-    port = openstack_networking_port_v2.eth5_r2.id
+    port = openstack_networking_port_v2.ens8_r2.id
   }
   user_data = file("cloud-config-r2.yml")
 }
@@ -639,16 +637,16 @@ resource "openstack_compute_instance_v2" "r3" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r3.id
+    port = openstack_networking_port_v2.ens4_r3.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r3.id
+    port = openstack_networking_port_v2.ens5_r3.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r3.id
+    port = openstack_networking_port_v2.ens6_r3.id
   }
   network {
-    port = openstack_networking_port_v2.eth5_r3.id
+    port = openstack_networking_port_v2.ens7_r3.id
   }
   user_data = file("cloud-config-r3.yml")
 }
@@ -663,13 +661,13 @@ resource "openstack_compute_instance_v2" "r4" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r4.id
+    port = openstack_networking_port_v2.ens4_r4.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r4.id
+    port = openstack_networking_port_v2.ens5_r4.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r4.id
+    port = openstack_networking_port_v2.ens6_r4.id
   }
   user_data = file("cloud-config-r4.yml")
 }
@@ -684,10 +682,10 @@ resource "openstack_compute_instance_v2" "r5" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r5.id
+    port = openstack_networking_port_v2.ens4_r5.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r5.id
+    port = openstack_networking_port_v2.ens5_r5.id
   }
   user_data = file("cloud-config-r5.yml")
 }
@@ -702,13 +700,13 @@ resource "openstack_compute_instance_v2" "r6" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r6.id
+    port = openstack_networking_port_v2.ens4_r6.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r6.id
+    port = openstack_networking_port_v2.ens5_r6.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r6.id
+    port = openstack_networking_port_v2.ens6_r6.id
   }
   user_data = file("cloud-config-r6.yml")
 }
@@ -723,13 +721,13 @@ resource "openstack_compute_instance_v2" "r7" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r7.id
+    port = openstack_networking_port_v2.ens4_r7.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r7.id
+    port = openstack_networking_port_v2.ens5_r7.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r7.id
+    port = openstack_networking_port_v2.ens6_r7.id
   }
   user_data = file("cloud-config-r7.yml")
 }
@@ -744,15 +742,15 @@ resource "openstack_compute_instance_v2" "r11" {
 #  }
 
   network {
-    port = openstack_networking_port_v2.eth1_r11.id
+    port = openstack_networking_port_v2.ens3_r11.id
   }
 
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r11.id
+    port = openstack_networking_port_v2.ens4_r11.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r11.id
+    port = openstack_networking_port_v2.ens5_r11.id
   }
   user_data = file("cloud-config-r11.yml")
 }
@@ -767,10 +765,10 @@ resource "openstack_compute_instance_v2" "r12" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r12.id
+    port = openstack_networking_port_v2.ens4_r12.id
   }
   network {
-    port = openstack_networking_port_v2.eth4_r12.id
+    port = openstack_networking_port_v2.ens5_r12.id
   }
   user_data = file("cloud-config-r12.yml")
 }
@@ -785,10 +783,10 @@ resource "openstack_compute_instance_v2" "r13" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth2_r13.id
+    port = openstack_networking_port_v2.ens4_r13.id
   }
   network {
-    port = openstack_networking_port_v2.eth3_r13.id
+    port = openstack_networking_port_v2.ens5_r13.id
   }
   user_data = file("cloud-config-r13.yml")
 }
@@ -822,7 +820,7 @@ resource "openstack_compute_instance_v2" "gateway" {
   }
   #subredes
   network {
-    port = openstack_networking_port_v2.eth1_gateway.id
+    port = openstack_networking_port_v2.ens4_gateway.id
   }
   user_data = file("cloud-config-gateway.yml")
 }

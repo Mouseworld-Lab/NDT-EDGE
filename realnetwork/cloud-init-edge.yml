@@ -41,5 +41,18 @@ runcmd:
   - microk8s kubectl label nodes edge dedicated=control-plane
   - microk8s kubectl create -f /home/edge/L2S-M/deployments/l2sm-deployment.yaml
   - echo "l2sm setup completed at $(date)" > /var/log/microk8s_setup_done.log 
+  - sudo apt install ansible 
+  ##
+  - sudo ip link add vxlan-1 type vxlan id 96 dev ens3 dstport 47 remote  192.168.27.175
+  - sudo ip link set vxlan-1 up
+  - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/edge/NDT-EDGE
+  - cd /home/edge/NDT-EDGE/Edge
+  - microk8s kubectl apply -f v-network-1.yaml
+  - microk8s kubectl apply -f v-network-2.yaml
+  - microk8s kubectl apply -f vxlan-1.yaml
+  - microk8s kubectl apply -f proxy.yaml
+  - microk8s kubectl apply -f ned.yaml
+
+
 
 
