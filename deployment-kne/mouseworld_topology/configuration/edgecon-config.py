@@ -7,7 +7,7 @@ rutas = [
 ]
 
 # Puerta de enlace y nombre de interfaz comunes para todas las rutas
-puerta_enlace = "10.0.1.15
+puerta_enlace = "10.0.1.15"
 puerta_enlace_eth9 = "13.13.13.2"
 interfaz = "ens1"
 
