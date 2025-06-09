@@ -10,9 +10,9 @@
       async: 3600
       poll: 0
 
-    - name: Wait for 20 seconds
+    - name: Wait for 360 seconds
       pause:
-        seconds: 20
+        seconds: 360
 
 #---------------------------------clients-config---------------------------------------------------------------------------------------
 
@@ -67,54 +67,54 @@
       register: youtube_result2
 
 
-    - name: Wait for 1 minute
-      pause:
-        seconds: 60
+#    - name: Wait for 1 minute
+#      pause:
+#        seconds: 60
 
 
 
     - name: Execute file_transfer wget
-      shell: microk8s kubectl exec -n default client9 -- timeout 480 python3 ACROSSfile_transfer.py https://planet.openstreetmap.org/planet/planet-latest.osm.bz2 14M
+      shell: microk8s kubectl exec -n default client9 -- timeout 660 python3 ACROSSfile_transfer.py https://planet.openstreetmap.org/planet/planet-latest.osm.bz2 14M
       async: 3600
       poll: 0
 
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client10 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 480 #set time and url
+      shell: microk8s kubectl exec -n default client10 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result1
 
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client11 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 480 #set time and url
+      shell: microk8s kubectl exec -n default client11 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result2
 
     - name: Execute shorts
-      shell: microk8s kubectl exec -n default cgclient12 -- python3.7 ACROSSshorts.py 480
+      shell: microk8s kubectl exec -n default cgclient12 -- python3.7 ACROSSshorts.py 660
       async: 3600
       poll: 0
       register: shorts_result1
 
     - name: Execute shorts
-      shell: microk8s kubectl exec -n default cgclient13 -- python3.7 ACROSSshorts.py 480
+      shell: microk8s kubectl exec -n default cgclient13 -- python3.7 ACROSSshorts.py 660
       async: 3600
       poll: 0
       register: shorts_result2
 
     - name: Execute aria2c
-      shell: microk8s kubectl exec -n default client14 -- timeout 480 aria2c --disable-ipv6=true --max-upload-limit=100 --max-download-limit=15M https://planet.openstreetmap.org/planet/planet-latest.osm.bz2.torrent
+      shell: microk8s kubectl exec -n default client14 -- timeout 660 aria2c --disable-ipv6=true --max-upload-limit=100 --max-download-limit=15M https://planet.openstreetmap.org/planet/planet-latest.osm.bz2.torrent
       async: 3600
       poll: 0
 
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client15 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2309821783 480 #set time and url
+      shell: microk8s kubectl exec -n default client15 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2480518040 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result3
 
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client16 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2309821783 480 #set time and url
+      shell: microk8s kubectl exec -n default client16 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2480518040 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result4
