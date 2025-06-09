@@ -10,9 +10,9 @@
       async: 3600
       poll: 0
 
-    - name: Wait for 360 seconds
+    - name: Wait for 180 seconds
       pause:
-        seconds: 360
+        seconds: 180
 
 #---------------------------------clients-config---------------------------------------------------------------------------------------
 
