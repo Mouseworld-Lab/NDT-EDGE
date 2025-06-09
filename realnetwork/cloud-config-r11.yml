@@ -45,3 +45,8 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y traceroute
 
+##
+  - sudo ip link add vxlan-1 type vxlan id 96 dev ens3 dstport 47 remote  192.168.27.185
+  - sudo ip link set vxlan-1 up
+  - sudo brctl addif br0 vxlan-1
+
