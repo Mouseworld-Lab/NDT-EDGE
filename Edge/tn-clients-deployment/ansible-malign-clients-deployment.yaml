@@ -82,7 +82,7 @@
       poll: 0
 
 
-    - name: Wait for 360 seconds
+    - name: Wait for 660 seconds
       pause:
         seconds: 660
 
