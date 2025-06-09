@@ -4,7 +4,7 @@ items:
 - apiVersion: networkop.co.uk/v1beta1
   kind: Topology
   metadata:
-    name: edgecon
+    name: testcon
     namespace: 6gndt
   spec:
     links:
@@ -22,7 +22,7 @@ items:
 - apiVersion: v1
   kind: Pod
   metadata:
-    name:  edgecon
+    name: testcon
     namespace: 6gndt
   spec:
     containers:
@@ -37,4 +37,4 @@ items:
     volumes:
     - name: config-volume
       configMap:
-        name: edgecon-config
+        name: edge-config

@@ -27,7 +27,7 @@ if resultado.returncode == 0:
     subprocess.run(comando_eliminar_ruta, shell=True)
 
 # Agregar la ruta por defecto
-comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth9} dev ens2"
+comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth9} dev ens1"
 subprocess.run(comando_ruta_por_defecto, shell=True)
 
 
