@@ -16,9 +16,9 @@
 
 #---------------------------------clients-config---------------------------------------------------------------------------------------
 
-    - name: Configure resolv.conf in clients 1 to 9
+    - name: Configure resolv.conf in clients 1 to 16
       shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'echo -e "nameserver 8.8.8.8\noptions edns0" > /etc/resolv.conf'
-      loop: "{{ range(1, 10) | list }}"
+      loop: "{{ range(1, 17) | list }}"
       ignore_errors: yes
 
 #---------------------------------Tasks execution---------------------------------------------------------------------------------------
@@ -28,21 +28,43 @@
       poll: 0
       register: random_result1
 
+    - name: Execute ACROSSrandom_walk
+      shell: microk8s kubectl exec -n default client2 -- python3.7 ACROSSrandom_walk.py 660
+      async: 3600
+      poll: 0
+      register: random_result2
+
     - name: Execute file_transfer_wget
-      shell: microk8s kubectl exec -n default client2 -- timeout 660 python3 ACROSSfile_transfer.py https://ia800301.us.archive.org/21/items/ThePhantomoftheOpera/Phantom_of_the_Opera_512kb.mp4 400K
+      shell: microk8s kubectl exec -n default client3 -- timeout 660 python3 ACROSSfile_transfer.py https://ia800301.us.archive.org/21/items/ThePhantomoftheOpera/Phantom_of_the_Opera_512kb.mp4 400K
+      async: 3600
+      poll: 0
+
+    - name: Execute file_transfer_wget
+      shell: microk8s kubectl exec -n default client4 -- timeout 660 python3 ACROSSfile_transfer.py https://ia800301.us.archive.org/21/items/ThePhantomoftheOpera/Phantom_of_the_Opera_512kb.mp4 400K
       async: 3600
       poll: 0
 
     - name: Execute benign dns request (dig)
-      shell: microk8s kubectl exec -n default client3 -- ./ACROSSrand_dig.sh 660
+      shell: microk8s kubectl exec -n default client5 -- ./ACROSSrand_dig.sh 660
+      async: 3600
+      poll: 0
+
+    - name: Execute benign dns request (dig)
+      shell: microk8s kubectl exec -n default client6 -- ./ACROSSrand_dig.sh 660
       async: 3600
       poll: 0
 
     - name: Execute ACROSSconsuming_video_YT.py
-      shell: microk8s kubectl exec -n default client4 -- python3.7 ACROSSconsuming_video_YT.py https://www.youtube.com/watch?v=wnhvanMdx4s 660 #set time and url
+      shell: microk8s kubectl exec -n default client7 -- python3.7 ACROSSconsuming_video_YT.py https://www.youtube.com/watch?v=wnhvanMdx4s 660 #set time and url
       async: 3600
       poll: 0
       register: youtube_result1
+
+    - name: Execute ACROSSconsuming_video_YT.py
+      shell: microk8s kubectl exec -n default client8 -- python3.7 ACROSSconsuming_video_YT.py https://www.youtube.com/watch?v=wnhvanMdx4s 660 #set time and url
+      async: 3600
+      poll: 0
+      register: youtube_result2
 
 
 #    - name: Wait for 1 minute
@@ -52,33 +74,50 @@
 
 
     - name: Execute file_transfer wget
-      shell: microk8s kubectl exec -n default client5 -- timeout 660 python3 ACROSSfile_transfer.py https://planet.openstreetmap.org/planet/planet-latest.osm.bz2 14M
+      shell: microk8s kubectl exec -n default client9 -- timeout 660 python3 ACROSSfile_transfer.py https://planet.openstreetmap.org/planet/planet-latest.osm.bz2 14M
       async: 3600
       poll: 0
 
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client6 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 660 #set time and url
+      shell: microk8s kubectl exec -n default client10 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result1
 
-    - name: Execute shorts
-      shell: microk8s kubectl exec -n default cgclient7 -- python3.7 ACROSSshorts.py 660
-      async: 3600
-      poll: 0
-      register: shorts_result1
-
-    - name: Execute aria2c
-      shell: microk8s kubectl exec -n default client8 -- timeout 660 aria2c --disable-ipv6=true --max-upload-limit=100 --max-download-limit=15M https://planet.openstreetmap.org/planet/planet-latest.osm.bz2.torrent
-      async: 3600
-      poll: 0
-
     - name: Execute ACROSSconsuming_video.py
-      shell: microk8s kubectl exec -n default client9 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2480518040 660 #set time and url
+      shell: microk8s kubectl exec -n default client11 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/leekbeats 660 #set time and url
       async: 3600
       poll: 0
       register: twitch_result2
 
+    - name: Execute shorts
+      shell: microk8s kubectl exec -n default cgclient12 -- python3.7 ACROSSshorts.py 660
+      async: 3600
+      poll: 0
+      register: shorts_result1
+
+    - name: Execute shorts
+      shell: microk8s kubectl exec -n default cgclient13 -- python3.7 ACROSSshorts.py 660
+      async: 3600
+      poll: 0
+      register: shorts_result2
+
+    - name: Execute aria2c
+      shell: microk8s kubectl exec -n default client14 -- timeout 660 aria2c --disable-ipv6=true --max-upload-limit=100 --max-download-limit=15M https://planet.openstreetmap.org/planet/planet-latest.osm.bz2.torrent
+      async: 3600
+      poll: 0
+
+    - name: Execute ACROSSconsuming_video.py
+      shell: microk8s kubectl exec -n default client15 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2480518040 660 #set time and url
+      async: 3600
+      poll: 0
+      register: twitch_result3
+
+    - name: Execute ACROSSconsuming_video.py
+      shell: microk8s kubectl exec -n default client16 -- python3.7 ACROSSconsuming_video.py https://www.twitch.tv/videos/2480518040 660 #set time and url
+      async: 3600
+      poll: 0
+      register: twitch_result4
 
     # Waiting tasks
     - name: Waiting
@@ -86,10 +125,15 @@
         jid: "{{ item.ansible_job_id }}"
       loop:
         - "{{ youtube_result1 }}"
+        - "{{ youtube_result2 }}"
         - "{{ twitch_result1 }}"
         - "{{ twitch_result2 }}"
+        - "{{ twitch_result3 }}"
+        - "{{ twitch_result4 }}"
         - "{{ shorts_result1 }}"
+        - "{{ shorts_result2 }}"
         - "{{ random_result1 }}"
+        - "{{ random_result2 }}"
       register: acrossclient_jobs
       until: acrossclient_jobs.finished
       retries: 999
