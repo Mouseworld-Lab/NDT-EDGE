@@ -20,6 +20,9 @@
     - name: Configure gateway1
       shell: kubectl exec -n 6gndt gateway1 -- python3 gateway1-config.py
 
+    - name: Configure edgecon
+      shell: kubectl exec -n 6gndt edgecon -- python3 edgecon-config.py
+
     - name: Get ddosserver IP
       shell: "kubectl exec -n 6gndt ddosserver -- ip addr show ens1 | awk '/inet / {gsub(/\\/\\/[0-9]+/, \"\", $2); print $2}'"
       register: ddosserver_ip_output
@@ -73,7 +76,7 @@
       ignore_errors: yes
 
     - name: add edge r2
-      shell: kubectl exec -n 6gndt r2 -- sudo ip route add default via 192.168.15.3 dev ens4
+      shell: kubectl exec -n 6gndt r2 -- sudo ip route add 10.0.2.0/24 via 192.168.4.1 dev ens6
       ignore_errors: yes
 
     - name: add default route r3     
@@ -117,7 +120,7 @@
       ignore_errors: yes
 
     - name: add default route r11
-      shell: kubectl exec -n 6gndt r11 -- sudo ip route replace default via 192.168.1.1 dev ens4 && sudo ip route add 10.0.2.0/24 via 13.13.13.11 dev eth2
+      shell: kubectl exec -n 6gndt r11 -- sudo ip route replace default via 192.168.1.1 dev ens4
       ignore_errors: yes
 
     - name: add edge r11
@@ -133,7 +136,7 @@
       ignore_errors: yes
 
     - name: add default route r13
-      shell: kubectl exec -n 6gndt r13 -- sudo ip route replace default via 192.168.12.3 dev ens4 && sudo ip route add 10.0.2.0/24 via 192.168.12.3 dev ens4
+      shell: kubectl exec -n 6gndt r13 -- sudo ip route replace default via 192.168.12.3 dev ens4
       ignore_errors: yes
 
     - name: add edge r13
