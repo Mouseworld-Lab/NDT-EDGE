@@ -18,7 +18,7 @@ provider "openstack" {
 
 variable "image_name"                { default = "HLx-FRR" }
 variable "flavor_name"               { default = "FRR" }
-variable "flavor_edge"               { default = "Edgev3" }
+variable "flavor_edge"               { default = "Edgev4" }
 variable "image_edge"                { default = "Ubuntu 22.04"}
 variable "management-network"        { default = "management-network" }
 variable "r5r6"          { default = "r5r6" }
@@ -574,17 +574,17 @@ resource "openstack_networking_port_v2" "ens3_edge" {
 }
 
 # ----------------------- edge-kne  -----------------------
-resource "openstack_networking_port_v2" "ens3_edge_kne" {
-  name       = "ens3"
-  network_id = data.openstack_networking_network_v2.mgmt_network.id
+#resource "openstack_networking_port_v2" "ens3_edge_kne" {
+#  name       = "ens3"
+#  network_id = data.openstack_networking_network_v2.mgmt_network.id
 
-  fixed_ip {
-    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
-    ip_address = "192.168.27.186"
-  }
-  security_group_ids = []
-  port_security_enabled  = false
-}
+#  fixed_ip {
+#    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
+#    ip_address = "192.168.27.186"
+#  }
+#  security_group_ids = []
+#  port_security_enabled  = false
+#}
 
 
 # -----------------------
@@ -834,15 +834,15 @@ resource "openstack_compute_instance_v2" "gateway" {
   user_data = file("cloud-config-gateway.yml")
 }
 
-resource "openstack_compute_instance_v2" "edge_kne" {
-  name            = "edge_kne"
-  image_id        = data.openstack_images_image_v2.image_edge.id
-  flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
+#resource "openstack_compute_instance_v2" "edge_kne" {
+#  name            = "edge_kne"
+#  image_id        = data.openstack_images_image_v2.image_edge.id
+#  flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
 
-  network {
-    port = openstack_networking_port_v2.ens3_edge_kne.id
-  }
+#  network {
+#    port = openstack_networking_port_v2.ens3_edge_kne.id
+#  }
 
 
-  user_data = file("cloud-init-edge-kne.yml")
-}
+#  user_data = file("cloud-init-edge-kne.yml")
+#}

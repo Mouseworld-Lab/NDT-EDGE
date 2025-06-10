@@ -30,6 +30,7 @@ runcmd:
   - chown -R edge:edge /home/edge/.kube
   - chmod 0700 /home/edge/.kube
   - echo "alias k='microk8s kubectl'" >> /home/edge/.bash_aliases
+  - echo "alias kubectl='microk8s kubectl'" >> /home/edge/.bash_aliases
   - chown edge:edge /home/edge/.bash_aliases
   - sudo -u edge microk8s status --wait-ready
   - sudo -u edge microk8s enable community
@@ -46,7 +47,7 @@ runcmd:
   ##
   - sudo ip link add vxlan-1 type vxlan id 96 dev ens3 dstport 47 remote  192.168.27.175
   - sudo ip link set vxlan-1 up
-  - git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git 
+  - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/edge/NDT-EDGE && cd /home/edge/NDT-EDGE
   - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/v-network-1.yaml
   - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/v-network-2.yaml
   - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/vxlan-1.yaml
