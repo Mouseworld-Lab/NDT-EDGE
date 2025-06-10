@@ -68,7 +68,7 @@
       ignore_errors: yes
 
     - name: add edge r1
-      shell: kubectl exec -n 6gndt r1 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.1.11 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.1.11 dev ens6'
+      shell: kubectl exec -n 6gndt r1 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.1.11 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.1.11 dev ens6'
       ignore_errors: yes
 
     - name: add default route r2
@@ -76,7 +76,7 @@
       ignore_errors: yes
 
     - name: add edge r2
-      shell: kubectl exec -n 6gndt r2 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.4.1 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.4.1 dev ens6'
+      shell: kubectl exec -n 6gndt r2 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.4.1 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.4.1 dev ens6'
       ignore_errors: yes
 
     - name: add default route r3     
@@ -84,7 +84,7 @@
       ignore_errors: yes
     
     - name: add edge r3     
-      shell: kubectl exec -n 6gndt r3 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.8.20 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.8.20 dev ens6'
+      shell: kubectl exec -n 6gndt r3 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.8.20 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.8.20 dev ens6'
       ignore_errors: yes
 
     - name: add default route r4
@@ -92,7 +92,7 @@
       ignore_errors: yes
     
     - name: add edge r4
-      shell: kubectl exec -n 6gndt r4 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.2.11 dev ens5 && sudo ip route add 11.0.2.0/24 via 192.168.2.11 dev ens5'
+      shell: kubectl exec -n 6gndt r4 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.2.11 dev ens5 && sudo ip route add 11.0.2.0/24 via 192.168.2.11 dev ens5'
       ignore_errors: yes
 
     - name: add default route r5
@@ -100,7 +100,7 @@
       ignore_errors: yes
 
     - name: add edge r5
-      shell: kubectl exec -n 6gndt r5 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.7.6 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.7.6 dev ens4'
+      shell: kubectl exec -n 6gndt r5 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.7.6 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.7.6 dev ens4'
       ignore_errors: yes
 
     - name: add default route r6
@@ -108,7 +108,7 @@
       ignore_errors: yes
 
     - name: add edge r6
-      shell: kubectl exec -n 6gndt r6 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.5.4 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.5.4 dev ens6'
+      shell: kubectl exec -n 6gndt r6 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.5.4 dev ens6 && sudo ip route add 11.0.2.0/24 via 192.168.5.4 dev ens6'
       ignore_errors: yes
 
     - name: add default route r7
@@ -116,7 +116,7 @@
       ignore_errors: yes
 
     - name: add edge r7
-      shell: kubectl exec -n 6gndt r7 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.9.6 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.9.6 dev ens4'
+      shell: kubectl exec -n 6gndt r7 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.9.6 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.9.6 dev ens4'
       ignore_errors: yes
 
     - name: add default route r11
@@ -124,7 +124,7 @@
       ignore_errors: yes
 
     - name: add edge r11
-      shell: kubectl exec -n 6gndt r11 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 13.13.13.11 dev eth9 && sudo ip route add 11.0.2.0/24 via 13.13.13.11 dev eth9'
+      shell: kubectl exec -n 6gndt r11 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 13.13.13.11 dev eth9 && sudo ip route add 11.0.2.0/24 via 13.13.13.11 dev eth9'
       ignore_errors: yes
 
     - name: add default route r12
@@ -132,7 +132,7 @@
       ignore_errors: yes
 
     - name: add edge r12
-      shell: kubectl exec -n 6gndt r12 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.13.20 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.13.20 dev ens4'
+      shell: kubectl exec -n 6gndt r12 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.13.20 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.13.20 dev ens4'
       ignore_errors: yes
 
     - name: add default route r13
@@ -140,7 +140,7 @@
       ignore_errors: yes
 
     - name: add edge r13
-      shell: kubectl exec -n 6gndt r13 -- /bin/bash -c 'sudo ip route add 10.0.2.0/24 via 192.168.12.3 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.12.3 dev ens4'
+      shell: kubectl exec -n 6gndt r13 -- /bin/bash -c 'sudo ip route add 10.0.1.0/24 via 192.168.12.3 dev ens4 && sudo ip route add 11.0.2.0/24 via 192.168.12.3 dev ens4'
       ignore_errors: yes
 
 

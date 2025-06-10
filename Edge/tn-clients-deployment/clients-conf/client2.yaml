@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: client2
-    command: ["/bin/bash", "-c", "ip a add 10.0.2.21/24 dev net1 && ip route del default && ip route add default via 10.0.2.1 dev net1 && trap : TERM INT; sleep infinity & wait"]
+    command: ["/bin/bash", "-c", "ip a add 11.0.2.3/24 dev net1 && ip route del default && ip route add default via 11.0.2.1 dev net1 && trap : TERM INT; sleep infinity & wait"]
     image: javi14t/ddosclient:last
     securityContext:
       capabilities:
