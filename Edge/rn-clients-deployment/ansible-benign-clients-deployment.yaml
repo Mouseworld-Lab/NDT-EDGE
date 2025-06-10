@@ -107,13 +107,13 @@
       register: twitch_result2
 
     - name: Execute shorts
-      shell: microk8s kubectl exec -n default cgclient12 -- python3.7 ACROSSshorts.py 660
+      shell: microk8s kubectl exec -n default client12 -- python3.7 ACROSSshorts.py 660
       async: 3600
       poll: 0
       register: shorts_result1
 
     - name: Execute shorts
-      shell: microk8s kubectl exec -n default cgclient13 -- python3.7 ACROSSshorts.py 660
+      shell: microk8s kubectl exec -n default client13 -- python3.7 ACROSSshorts.py 660
       async: 3600
       poll: 0
       register: shorts_result2
