@@ -3,13 +3,13 @@ import subprocess
 # Definir las rutas a agregar
 rutas = [
     "10.0.2.0/24"
-    "10.0.1.0/24"
+    "11.0.2.0/24"
 ]
 
 # Puerta de enlace y nombre de interfaz comunes para todas las rutas
 puerta_enlace = "10.0.1.15"
 puerta_enlace_eth9 = "13.13.13.2"
-interfaz = "ens1"
+interfaz = "eth1"
 
 
 #Eliminar y agregar ruta por defecto 
@@ -27,7 +27,7 @@ if resultado.returncode == 0:
     subprocess.run(comando_eliminar_ruta, shell=True)
 
 # Agregar la ruta por defecto
-comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth9} dev ens1"
+comando_ruta_por_defecto = f"ip route add {ruta_por_defecto} via {puerta_enlace_eth9} dev eth2"
 subprocess.run(comando_ruta_por_defecto, shell=True)
 
 
