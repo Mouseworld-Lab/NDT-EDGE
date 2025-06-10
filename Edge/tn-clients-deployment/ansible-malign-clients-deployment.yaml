@@ -42,12 +42,12 @@
         
     - name: Generate custom .bashrc 
       shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'echo "export ddosserver=10.0.80.1" >> /root/.bashrc'
-      loop: "{{ range(1, 10) | list }}"
+      loop: "{{ range(1, 8) | list }}"
       ignore_errors: yes
 
     - name: Source.bashrc 
       shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'source /root/.bashrc'
-      loop: "{{ range(1, 10) | list }}"
+      loop: "{{ range(1, 8) | list }}"
       ignore_errors: yes
 
 #---------------------------------Tasks execution---------------------------------------------------------------------------------------
