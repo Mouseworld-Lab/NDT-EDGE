@@ -33,9 +33,9 @@
 
 #---------------------------------clients-config---------------------------------------------------------------------------------------
 
-    - name: Configure resolv.conf in clients 1 to 9
+    - name: Configure resolv.conf in clients 1 to 7
       shell: microk8s kubectl exec -n default client{{ item }} -- /bin/bash -c 'echo -e "nameserver 10.0.80.1\noptions edns0" > /etc/resolv.conf'
-      loop: "{{ range(1, 10) | list }}"
+      loop: "{{ range(1, 8) | list }}"
       ignore_errors: yes
 
 #---------------------------------------export variables----------------------------------------------------------------------------------------------
@@ -81,20 +81,8 @@
       async: 3600 
       poll: 0
 
-    - name: Start dnscrypt for DOH
-      shell: microk8s kubectl exec -n default client7 -- env ddosserver=10.0.80.1 ./dnscrypt-proxy-linux_x86_64-2.1.5/config.sh
-    - name: Execute doh flood
-      shell: microk8s kubectl exec -n default client7 -- env ddosserver=10.0.80.1 timeout 660 python3 cne-DoH-master/floodoh.py 30000 www.example.com A https://micaddy.com/dns-query
-      async: 3600 
-      poll: 0
-
     - name: Execute watertorture
-      shell: microk8s kubectl exec -n default client8 -- env ddosserver=10.0.80.1 /bin/bash -c './dns-flood/dnsflood example.com 10.0.80.1 -p 53 -R -S -d 660'
-      async: 3600 
-      poll: 0
-
-    - name: Execute synflood
-      shell: microk8s kubectl exec -n default client9 -- env ddosserver=10.0.80.1 /bin/bash -c 'timeout 660 ./synflood-master/build/bin/synflood 10.0.80.1 80 -i eth1'
+      shell: microk8s kubectl exec -n default client7 -- env ddosserver=10.0.80.1 /bin/bash -c './dns-flood/dnsflood example.com 10.0.80.1 -p 53 -R -S -d 660'
       async: 3600 
       poll: 0
 
