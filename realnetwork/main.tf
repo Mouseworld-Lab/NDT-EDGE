@@ -17,9 +17,11 @@ provider "openstack" {
 }
 
 variable "image_name"                { default = "HLx-FRR" }
+variable "image_edge"                { default = "Ubuntu 22.04"}
+
 variable "flavor_name"               { default = "FRR" }
 variable "flavor_edge"               { default = "Edgev4" }
-variable "image_edge"                { default = "Ubuntu 22.04"}
+
 variable "management-network"        { default = "management-network" }
 variable "r5r6"          { default = "r5r6" }
 variable "r2r3"          { default = "r2r3" }
@@ -36,8 +38,6 @@ variable "r7r13"         { default = "r7r13" }
 variable "r1r11"         { default = "r1r11" }
 variable "r1r2"          { default = "r1r2" }
 variable "r2-gateway"    { default = "r2-gateway" }
-#variable "edge-client"   { default = "edge-client" }
-
 
 data "openstack_images_image_v2" "image" {
   name = var.image_name
@@ -204,7 +204,7 @@ data "openstack_networking_subnet_v2" "subnet_r2-gateway" {
 
 # ----------------------- Interfaces  -----------------------
 
-
+# ----------------------- r1  -----------------------
 resource "openstack_networking_port_v2" "ens4_r1" {
   name       = "ens4"
   network_id = data.openstack_networking_network_v2.r1r4.id
@@ -340,7 +340,6 @@ resource "openstack_networking_port_v2" "ens7_r3" {
   port_security_enabled  = false
 }
 # ----------------------- r4  -----------------------
-
 resource "openstack_networking_port_v2" "ens4_r4" {
   name       = "ens4"
   network_id = data.openstack_networking_network_v2.r1r4.id
@@ -375,7 +374,6 @@ resource "openstack_networking_port_v2" "ens6_r4" {
   port_security_enabled  = false
 }
 # ----------------------- r5  -----------------------
-
 resource "openstack_networking_port_v2" "ens4_r5" {
   name       = "ens4"
   network_id = data.openstack_networking_network_v2.r5r6.id
@@ -467,7 +465,6 @@ resource "openstack_networking_port_v2" "ens6_r7" {
   port_security_enabled  = false
 }
 # ----------------------- r11  -----------------------
-
 resource "openstack_networking_port_v2" "ens3_r11" {
   name       = "ens3"
   network_id = data.openstack_networking_network_v2.mgmt_network.id
@@ -525,7 +522,6 @@ resource "openstack_networking_port_v2" "ens5_r12" {
   port_security_enabled  = false
 }
 # ----------------------- r13  -----------------------
-
 resource "openstack_networking_port_v2" "ens4_r13" {
   name       = "ens4"
   network_id = data.openstack_networking_network_v2.r3r13.id
@@ -572,21 +568,6 @@ resource "openstack_networking_port_v2" "ens3_edge" {
   security_group_ids = []
   port_security_enabled  = false
 }
-
-# ----------------------- edge-kne  -----------------------
-#resource "openstack_networking_port_v2" "ens3_edge_kne" {
-#  name       = "ens3"
-#  network_id = data.openstack_networking_network_v2.mgmt_network.id
-
-#  fixed_ip {
-#    subnet_id  = data.openstack_networking_subnet_v2.subnet_mgmt_network.id                
-#    ip_address = "192.168.27.186"
-#  }
-#  security_group_ids = []
-#  port_security_enabled  = false
-#}
-
-
 # -----------------------
 # Instances
 # -----------------------
@@ -611,7 +592,6 @@ resource "openstack_compute_instance_v2" "r1" {
   }
   user_data = file("cloud-config-r1.yml")
 }
-
 resource "openstack_compute_instance_v2" "r2" {
   name            = "r2"
   image_id        = data.openstack_images_image_v2.image.id
@@ -639,7 +619,6 @@ resource "openstack_compute_instance_v2" "r2" {
   }
   user_data = file("cloud-config-r2.yml")
 }
-
 resource "openstack_compute_instance_v2" "r3" {
   name            = "r3"
   image_id        = data.openstack_images_image_v2.image.id
@@ -663,7 +642,6 @@ resource "openstack_compute_instance_v2" "r3" {
   }
   user_data = file("cloud-config-r3.yml")
 }
-
 resource "openstack_compute_instance_v2" "r4" {
   name            = "r4"
   image_id        = data.openstack_images_image_v2.image.id
@@ -684,7 +662,6 @@ resource "openstack_compute_instance_v2" "r4" {
   }
   user_data = file("cloud-config-r4.yml")
 }
-
 resource "openstack_compute_instance_v2" "r5" {
   name            = "r5"
   image_id        = data.openstack_images_image_v2.image.id
@@ -702,7 +679,6 @@ resource "openstack_compute_instance_v2" "r5" {
   }
   user_data = file("cloud-config-r5.yml")
 }
-
 resource "openstack_compute_instance_v2" "r6" {
   name            = "r6"
   image_id        = data.openstack_images_image_v2.image.id
@@ -723,7 +699,6 @@ resource "openstack_compute_instance_v2" "r6" {
   }
   user_data = file("cloud-config-r6.yml")
 }
-
 resource "openstack_compute_instance_v2" "r7" {
   name            = "r7"
   image_id        = data.openstack_images_image_v2.image.id
@@ -744,16 +719,11 @@ resource "openstack_compute_instance_v2" "r7" {
   }
   user_data = file("cloud-config-r7.yml")
 }
-
 resource "openstack_compute_instance_v2" "r11" {
   name            = "r11"
   image_id        = data.openstack_images_image_v2.image.id
   flavor_id       = data.openstack_compute_flavor_v2.flavor.id
   #mgmt
-#  network {
-#    uuid = data.openstack_networking_network_v2.mgmt_network.id
-#  }
-
   network {
     port = openstack_networking_port_v2.ens3_r11.id
   }
@@ -767,7 +737,6 @@ resource "openstack_compute_instance_v2" "r11" {
   }
   user_data = file("cloud-config-r11.yml")
 }
-
 resource "openstack_compute_instance_v2" "r12" {
   name            = "r12"
   image_id        = data.openstack_images_image_v2.image.id
@@ -785,7 +754,6 @@ resource "openstack_compute_instance_v2" "r12" {
   }
   user_data = file("cloud-config-r12.yml")
 }
-
 resource "openstack_compute_instance_v2" "r13" {
   name            = "r13"
   image_id        = data.openstack_images_image_v2.image.id
@@ -816,8 +784,6 @@ resource "openstack_compute_instance_v2" "edge" {
 
   user_data = file("cloud-init-edge.yml")
 }
-
-
 resource "openstack_compute_instance_v2" "gateway" {
   name            = "gateway"
   image_id        = data.openstack_images_image_v2.image.id
@@ -834,15 +800,3 @@ resource "openstack_compute_instance_v2" "gateway" {
   user_data = file("cloud-config-gateway.yml")
 }
 
-#resource "openstack_compute_instance_v2" "edge_kne" {
-#  name            = "edge_kne"
-#  image_id        = data.openstack_images_image_v2.image_edge.id
-#  flavor_id       = data.openstack_compute_flavor_v2.flavor_edge.id
-
-#  network {
-#    port = openstack_networking_port_v2.ens3_edge_kne.id
-#  }
-
-
-#  user_data = file("cloud-init-edge-kne.yml")
-#}
