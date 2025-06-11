@@ -232,4 +232,4 @@
 #---------------------------------------ddosclient, cgserver and ddosserver configuration----------------------------------------------------------------------------------------------
 
     - name: Copy pcap
-      shell: kubectl cp -n 6gndt /home/mw/ens6_r2.pcap  r2:/home/r2/ens6_r2.pcap
+      shell: kubectl cp -n 6gndt /home/mw/ens6_r2.pcap  r2:/tmp/

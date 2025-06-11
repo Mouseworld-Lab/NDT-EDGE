@@ -7,4 +7,4 @@
 #------------------------------------------Ip_routes---------------------------------------------------------------------      
       
     - name: Replay
-      shell: kubectl exec -it -n 6gndt r2 -- tcpreplay -i ens6 /home/r2/ens6_r2.pcap
+      shell: kubectl exec -it -n 6gndt r2 -- tcpreplay -i ens6 /tmp/ens6_r2.pcap
