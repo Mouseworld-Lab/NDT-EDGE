@@ -9,11 +9,11 @@ def main():
     subprocess.run(['ansible-playbook', 'mw-config.yaml'])
     subprocess.run(['ansible-playbook', 'mw-mirror.yaml'])
 
+    input("Pulsa ENTER para reproducir el pcap...")
 
-    input("Pulsa ENTER para ejecutar el undeploy...")
+    subprocess.run(['ansible-playbook', 'mw-replay.yaml'])
+
+    input("Pulsa ENTER para terminar...")
     
-    # After executing, automatically execute mw-undeploy.yaml
-    subprocess.run(['ansible-playbook', 'mw-undeploy.yaml'])
-
 if __name__ == '__main__':
     main()
