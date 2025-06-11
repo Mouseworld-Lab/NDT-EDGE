@@ -1,0 +1,59 @@
+#cloud-config
+hostname: edge
+fqdn: edge
+manage_etc_hosts: True
+
+users:
+  - name: edge
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: sudo
+
+chpasswd:
+  list: |
+    edge:edge1
+  expire: false
+  encrypted: false
+
+ssh_pwauth: True
+timezone: Europe/Madrid
+
+package_update: true
+package_upgrade: true
+
+
+
+runcmd:
+  - snap install microk8s --classic --channel=1.32
+  - usermod -a -G microk8s edge
+  - mkdir -p /home/edge/.kube
+  - chown -R edge:edge /home/edge/.kube
+  - chmod 0700 /home/edge/.kube
+  - echo "alias k='microk8s kubectl'" >> /home/edge/.bash_aliases
+  - echo "alias kubectl='microk8s kubectl'" >> /home/edge/.bash_aliases
+  - chown edge:edge /home/edge/.bash_aliases
+  - sudo -u edge microk8s status --wait-ready
+  - sudo -u edge microk8s enable community
+  - sudo -u edge microk8s enable multus
+  - echo "microk8s setup completed at $(date)" > /var/log/microk8s_setup_done.log # 5min
+  - sudo apt-get update
+  - sudo apt-get install -y subversion
+  - git clone --depth 1 --filter=blob:none --sparse https://github.com/Mouseworld-Lab/NDT-Prototype.git /home/edge/repo && cd /home/edge/repo && git sparse-checkout set L2S-M && mkdir -p /home/edge/L2S-M && mv L2S-M/* /home/edge/L2S-M/ && rm -rf /home/edge/repo
+  - microk8s kubectl label nodes edge dedicated=control-plane
+  - microk8s kubectl create -f /home/edge/L2S-M/deployments/l2sm-deployment.yaml
+  - microk8s kubectl rollout status deployment/l2sm-deployment --timeout=300s
+  - echo "l2sm setup completed at $(date)" > /var/log/microk8s_setup_done.log 
+  - sudo apt-get install -y ansible 
+  ##
+  - sudo ip link add vxlan-1 type vxlan id 97 dev ens3 dstport 47 remote 192.168.159.18
+  - sudo ip link set vxlan-1 up
+  - sudo git clone https://github.com/Mouseworld-Lab/NDT-EDGE.git /home/edge/NDT-EDGE && cd /home/edge/NDT-EDGE
+  - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/v-network-1.yaml
+  - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/v-network-2.yaml
+  - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/vxlan-1.yaml
+  - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/proxy.yaml
+  - microk8s kubectl apply -f /home/edge/NDT-EDGE/Edge/ned.yaml
+
+
+
+
