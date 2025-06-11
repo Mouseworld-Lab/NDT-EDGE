@@ -2,7 +2,7 @@ import subprocess
 
 # Definir las rutas a agregar
 rutas = [
-    "10.0.1.0/24"
+    "10.0.1.0/24",
     "11.0.2.0/24"
 ]
 
