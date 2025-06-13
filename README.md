@@ -71,7 +71,7 @@ To fully set up the digital twin network, you can execute the following Python s
 > 3. The real time mirroring requires a dummy interface named `mirror` to be created on the worker node. If this interface is not present, the execution of `mw-mirror.yaml` may fail. You can create it manually by running:
 >    ```bash
 >    sudo ip link add name mirror type dummy
->   sudo ip link set mirror up
->   ```
+>    sudo ip link set mirror up
+>    ```
 >  This step can be omitted if you do not intend to use the real-time mirroring functionality.
 
