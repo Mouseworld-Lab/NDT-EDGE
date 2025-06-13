@@ -11,7 +11,7 @@
   - [Other requirements](#Other-requirements)
 - [Overview of the Demo](#overview-of-the-demo)
 - [Demo Video](#demo-video)
-- [NDT Deployment Guide](#ndt-deployment-guide)
+- [Deployment Guide](#deployment-guide)
 
 # Prerequisites
 
