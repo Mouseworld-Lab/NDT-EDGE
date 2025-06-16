@@ -1,4 +1,6 @@
 # Final prototype of an integrated Network Digital Twin (NDT) including the Edge
+The architecture is composed of four modules: the Real Network, Edge Node, Data Fabric, and the Network Digital Twin (NDT). The following sections detail the prerequisites and deployment procedures for each module within the final prototype architecture.
+The diagram below illustrates the overall architecture.
 
 ![INFRA](./images/ArchitectureFinal.png)
 
@@ -38,12 +40,12 @@ It was tested on a cluster with one controller node and one worker node, with th
 
 ## L2S-M:
 
-This demonstrator uses L2S-M version v2.4.0, located in the L2S-M folder within this repository.
+This demonstrator uses **L2S-M** version v2.4.0, located in the L2S-M folder within this repository.
 The official L2S-M repository is available here [here](https://github.com/Networks-it-uc3m/L2S-M.git)
 
 ### Edge Environment
 
-For edge and twin edge environments, this demonstrator uses L2S-M together with a MicroK8s cluster:
+For **edge and twin edge environments**, this demonstrator uses L2S-M together with a MicroK8s cluster:
 - **Kubernetes**: MicroK8s v v1.32.3  or later. _Tested on a single-node cluster._
 - **Network Plugin**: Multus CNI.
 
@@ -51,7 +53,7 @@ For edge and twin edge environments, this demonstrator uses L2S-M together with 
 
 ## Openstack:
 
-- To install OpenStack, follow the official instructions provided in the [Kolla Ansible Quickstart guide](https://docs.openstack.org/kolla-ansible/latest/user/quickstart.html#install-kolla-ansible). This was used for the real network environment.
+- To install **OpenStack**, follow the official instructions provided in the [Kolla Ansible Quickstart guide](https://docs.openstack.org/kolla-ansible/latest/user/quickstart.html#install-kolla-ansible). This was used for the **real network environment**.
 
 --- 
 
