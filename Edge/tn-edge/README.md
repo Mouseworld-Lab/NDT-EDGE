@@ -19,7 +19,7 @@ k apply -f /home/edge/NDT-EDGE/Edge/tn-edge/ned.yaml
 
 1. **Deploy the 7 clients:**
 
-From the NDT-EDGE/Edge/rn-clients-deployment/clients-conf directory, apply all deployment files and wait until all clients are in the Running state:
+From the NDT-EDGE/Edge/tn-clients-deployment/clients-conf directory, apply all deployment files and wait until all clients are in the Running state:
 
 ```
 k apply -f .
