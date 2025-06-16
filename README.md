@@ -59,56 +59,7 @@ sudo apt install ansible python3
 # Deployment Guide
 
 - [Real Network Deployment](./realnetwork/README.md)
-## Edge:
+- [Edge Deployment](./Edge/rn-edge/README.md)
+- [Twin Network Deployment](./TwinNetwork/README.md)
 
-
-### Deploy of pod ned and proxy in the Edge:
-If you have already completed the previous step, you should have the repository cloned. If not, clone this repository and change into the NDT-EDGE/Edge/rn-edge directory. Then, apply the network configuration files that define the Multus networks for edge connectivity, along with the deployment of the pods that enable communication between the previously deployed real network and the edge. 
-
-```
-k apply -f /home/edge/NDT-EDGE/Edge/v-network-1.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/v-network-2.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/vxlan-1.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/proxy.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/ned.yaml
- ```
-> **Note:**
->  1. Make sure to create the networks before deploying the ned and proxy pods, as these pods are associated with the networks.
->  2. Wait until the ned and proxy pods are in a Running state.
-
-### Deploy of clients:
-
-1. **Deploy the 7 clients:**
-
-From the NDT-EDGE/Edge/rn-clients-deployment/clients-conf directory, apply all deployment files and wait until all clients are in the Running state:
-
-```
-k apply -f .
- ```
-
-2. **Generate traffic from the clients:**
-
-In the NDT-EDGE/Edge/rn-clients-deployment directory, execute the Ansible playbook to generate traffic across the real network:
-
-```
-ansible-playbook ansible-benign-clients-deployment.yaml
- ```
-> **Note:**
->  1. Ensure all client pods are running before executing the playbook to avoid traffic generation errors.
-
-## Twin Network:
-
-To fully set up the digital twin network, you can execute the following Python script 'mw-run.py', which will automatically launch the entire deployment process:
-```
- python3 deployment-kne/mw-run.py
- ```
-> **Note:**
->  1. It is necessary to load the images of the clients and routers previously in the machine where the topology will be deployed.
-> 2. In the deployment-kne/mouseworld_topology/pod-gateway2.yaml file, to enable internet access, we are connecting the pod to its host's interface. You need to modify the interface name accordingly, depending on which interface you want to connect to.
-> 3. ***The real time mirroring requires a dummy interface named `mirror` to be created on the worker node. If this interface is not present, the execution of `mw-mirror.yaml` may fail. You can create it manually by running:
->    ```bash
->    sudo ip link add name mirror type dummy
->    sudo ip link set mirror up
->    ```
->  ***This step can be omitted if you do not intend to use the real-time mirroring functionality.
 
