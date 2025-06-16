@@ -1,6 +1,6 @@
 # Final prototype of an integrated Network Digital Twin (NDT) including the Edge
 
-![INFRA](ArchitectureFinal.png)
+![INFRA](./images/ArchitectureFinal.png)
 
 # Table of Contents
 
@@ -54,7 +54,7 @@ sudo apt install ansible python3
 # Overview of the Demo
 The demonstrator comprises two separate environments: a Real Network and a Twin Network, interconnected through a framework known as the CANDIL Data Fabric. The diagram below illustrates the overall architecture and how its components interact.
 
-![NDT_architecture](NDT_architecture.png)
+![NDT_architecture](./images/NDT_architecture.png)
 
 # Demo Video
 
