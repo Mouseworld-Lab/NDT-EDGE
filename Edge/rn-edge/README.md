@@ -22,7 +22,7 @@ k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/ned.yaml
 From the NDT-EDGE/Edge/rn-clients-deployment/clients-conf directory, apply all deployment files and wait until all clients are in the Running state:
 
 ```
-k apply -f .
+k apply -f /home/edge/NDT-EDGE/Edge/rn-clients-deployment/clients-conf/
  ```
 
 2. **Generate traffic from the clients:**
@@ -30,7 +30,7 @@ k apply -f .
 In the NDT-EDGE/Edge/rn-clients-deployment directory, execute the Ansible playbook to generate traffic across the real network:
 
 ```
-ansible-playbook ansible-benign-clients-deployment.yaml
+ansible-playbook /home/edge/NDT-EDGE/Edge/rn-clients-deployment/ansible-benign-clients-deployment.yaml
  ```
 > **Note:**
 >  1. Ensure all client pods are running before executing the playbook to avoid traffic generation errors.
