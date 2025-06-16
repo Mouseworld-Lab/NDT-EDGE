@@ -60,6 +60,6 @@ sudo apt install ansible python3
 
 - [Real Network Deployment](./realnetwork/README.md)
 - [Edge Deployment](./Edge/rn-edge/README.md)
-- [Twin Network Deployment](./TwinNetwork/README.md)
+- [Twin Network Deployment](./deployment-kne/README.md)
 
 
