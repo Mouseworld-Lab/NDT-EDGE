@@ -65,8 +65,12 @@ The demonstrator comprises two separate environments: a Real Network and a Twin 
 
 ![NDT_architecture](./images/NDT_architecture.png)
 
-# Demo Video
+---
 
+# Demo Video
+The demo video will be available soon ...
+
+--- 
 # Deployment Guide
 Each component is deployed independently following the guides below:
 - **Real Network**: OpenStack-based deployment of a virtual network with FRRouting routers, supporting realistic traffic flows including standard and heavy hitter flows.
