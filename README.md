@@ -22,7 +22,7 @@
 
 ### Tested Environment
 
-This demo was tested on a 1-node cluster with the following configuration:
+This demonstrator was tested on a cluster with 1 controller node and 1 worker node, using the following configuration
 
 - **Kubernetes**: v1.27.3
 - **Network Plugin**: Flannel CNI
@@ -33,17 +33,20 @@ This demo was tested on a 1-node cluster with the following configuration:
 - **Router Images**: Download the image from [FRRouting](https://docs.frrouting.org/projects/dev-guide/en/latest/building-docker.html). _Tested with the release 10.3_
 
 ## L2S-M:
-### Installation
 
-- For installing **L2S-M**, follow the instructions provided in the official repository: [L2S-M GitHub Repository](https://github.com/Networks-it-uc3m/L2S-M/tree/main/deployments)
+This demonstrator uses L2S-M version v2.4.0, located in the L2S-M folder within this repository.
+The official L2S-M repository is available here [here](https://github.com/Networks-it-uc3m/L2S-M.git)
 
-### Tested Environment
+### Edge Environment
 
-This demo was tested on a microK8s cluster with the following configuration:
-- **Kubernetes**: MicroK8s v1.31.0 or later. _Tested on a single-node cluster._
+For edge and twin edge environments, this demonstrator uses L2S-M together with a MicroK8s cluster:
+- **Kubernetes**: MicroK8s v v1.32.3  or later. _Tested on a single-node cluster._
 - **Network Plugin**: Multus CNI.
 
 ## Openstack:
+
+- To install OpenStack, follow the official instructions provided in the [Kolla Ansible Quickstart guide.](https://docs.openstack.org/kolla-ansible/latest/user/quickstart.html#install-kolla-ansible). This was used for the real network environment.
+
 
 ## Other requirements:
 The deployment of the scenario has been automated using Ansible and Python. Therefore, both tools must be installed on the machine where you intend to deploy the topology. If they are not already installed, you can install them using the following command:
