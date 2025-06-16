@@ -58,6 +58,62 @@ sudo apt install ansible python3
 
 # Deployment Guide
 
+## Real Network:
+
+Clone this repository and change into the NDT-EDGE/realnetwork directory. Then, initialize Terraform and apply the configuration using the commands below to deploy the real network scenario in OpenStack
+
+```
+ terraform init
+ terraform apply
+ ```
+> **Note:**
+>  1. The deployed scenario consists of 11 routers running FRRouting software, based on an Ubuntu 22.04 image specially built for this experiment. This image has been previously uploaded to OpenStack.
+
+> 2. The networks are defined in the main.tf file according to the point-to-point connections that establish the reference topology 
+
+> 3. The startup and proper functioning of the virtual machines takes approximately 30 to 40 minutes. You can monitor the boot process by checking the log file with the command 
+```
+ sudo cat /var/log/cloud-init-output.log
+```
+When the startup is complete, you will see a message like:
+Cloud-init v. 24.4.1-0ubuntu0~22.04.1 finished
+
+## Edge:
+
+
+### Deploy of pod ned and proxy in the Edge:
+If you have already completed the previous step, you should have the repository cloned. If not, clone this repository and change into the NDT-EDGE/Edge/rn-edge directory. Then, apply the network configuration files that define the Multus networks for edge connectivity, along with the deployment of the pods that enable communication between the previously deployed real network and the edge. 
+
+```
+k apply -f /home/edge/NDT-EDGE/Edge/v-network-1.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/v-network-2.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/vxlan-1.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/proxy.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/ned.yaml
+ ```
+> **Note:**
+>  1. Make sure to create the networks before deploying the ned and proxy pods, as these pods are associated with the networks.
+>  2. Wait until the ned and proxy pods are in a Running state.
+
+### Deploy of clients:
+
+1. **Deploy the 7 clients:**
+
+From the NDT-EDGE/Edge/rn-clients-deployment/clients-conf directory, apply all deployment files and wait until all clients are in the Running state:
+
+```
+k apply -f .
+ ```
+
+2. **Generate traffic from the clients:**
+
+In the NDT-EDGE/Edge/rn-clients-deployment directory, execute the Ansible playbook to generate traffic across the real network:
+
+```
+ansible-playbook ansible-benign-clients-deployment.yaml
+ ```
+> **Note:**
+>  1. Ensure all client pods are running before executing the playbook to avoid traffic generation errors.
 
 ## Twin Network:
 
