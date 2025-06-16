@@ -5,11 +5,11 @@
 If you have already completed the previous step, you should have the repository cloned. If not, clone this repository and change into the NDT-EDGE/Edge/rn-edge directory. Then, apply the network configuration files that define the Multus networks for edge connectivity, along with the deployment of the pods that enable communication between the previously deployed real network and the edge. 
 
 ```
-k apply -f /home/edge/NDT-EDGE/Edge/v-network-1.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/v-network-2.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/vxlan-1.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/proxy.yaml
-k apply -f /home/edge/NDT-EDGE/Edge/ned.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/v-network-1.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/v-network-2.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/vxlan-1.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/proxy.yaml
+k apply -f /home/edge/NDT-EDGE/Edge/rn-edge/ned.yaml
  ```
 > **Note:**
 >  1. Make sure to create the networks before deploying the ned and proxy pods, as these pods are associated with the networks.

@@ -66,8 +66,11 @@ OpenStack-based deployment of a virtual network with FRRouting routers, supporti
 Semantic framework for real-time data integration and knowledge graph construction:
   - [mouseworld-kg](https://github.com/Mouseworld-Lab/mouseworld-kg)
   - [mouseworld-ontology](https://github.com/Mouseworld-Lab/mouseworld-ontology)
-- [Edge Deployment](./Edge/rn-edge/README.md)
+- **Edge**
 Kubernetes-based edge layer where client pods interface with both networks and generate realistic traffic.
+- [Edge Deployment](./Edge/rn-edge/README.md)
+- [Twin Edge Deployment](./Edge/tn-edge/README.md)
+
 - [Twin Network Deployment](./deployment-kne/README.md)
 Digital twin of the Real Network, deployed with KNE to emulate network scenarios.
 
