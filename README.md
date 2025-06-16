@@ -22,7 +22,9 @@
 
 ### Tested Environment
 
-This demonstrator was tested on a cluster with 1 controller node and 1 worker node, using the following configuration
+This demonstrator uses **KNE** to deploy the **twin network**.  
+It was tested on a cluster with one controller node and one worker node, with the following configuration:
+
 
 - **Kubernetes**: v1.27.3
 - **Network Plugin**: Flannel CNI
@@ -31,6 +33,8 @@ This demonstrator was tested on a cluster with 1 controller node and 1 worker no
 - **Python**: v3.8.10.
 - **Go**: v1.20.1.
 - **Router Images**: Download the image from [FRRouting](https://docs.frrouting.org/projects/dev-guide/en/latest/building-docker.html). _Tested with the release 10.3_
+
+---
 
 ## L2S-M:
 
@@ -43,10 +47,13 @@ For edge and twin edge environments, this demonstrator uses L2S-M together with 
 - **Kubernetes**: MicroK8s v v1.32.3  or later. _Tested on a single-node cluster._
 - **Network Plugin**: Multus CNI.
 
+---
+
 ## Openstack:
 
-- To install OpenStack, follow the official instructions provided in the [Kolla Ansible Quickstart guide.](https://docs.openstack.org/kolla-ansible/latest/user/quickstart.html#install-kolla-ansible). This was used for the real network environment.
+- To install OpenStack, follow the official instructions provided in the [Kolla Ansible Quickstart guide](https://docs.openstack.org/kolla-ansible/latest/user/quickstart.html#install-kolla-ansible). This was used for the real network environment.
 
+--- 
 
 ## Other requirements:
 The deployment of the scenario has been automated using Ansible and Python. Therefore, both tools must be installed on the machine where you intend to deploy the topology. If they are not already installed, you can install them using the following command:
