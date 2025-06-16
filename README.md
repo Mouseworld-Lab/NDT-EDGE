@@ -1,6 +1,6 @@
 # Final prototype of an integrated Network Digital Twin (NDT) including the Edge
 
-![INFRA](NDT_architecture.png)
+![INFRA](ArchitectureFinal.png)
 
 # Table of Contents
 
