@@ -71,4 +71,10 @@ Kubernetes-based edge layer where client pods interface with both networks and g
 - [Twin Network Deployment](./deployment-kne/README.md)
 Digital twin of the Real Network, deployed with KNE to emulate network scenarios.
 
+## Acknowledgements
 
+This work was supported by:
+
+- **UNICO 5G I+D 6G-EDGEDT**: El Edge hiper distribuido aplicado a gemelos digitales de redes completas de operador. Ministerio de Asuntos Económicos y Transformación Digital. European Union NextGenerationEU.
+
+  ![UNICO](./images/ack-logo.png)
