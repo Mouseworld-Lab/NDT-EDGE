@@ -52,14 +52,23 @@ sudo apt install ansible python3
 ```
 
 # Overview of the Demo
+The demonstrator comprises two separate environments: a Real Network and a Twin Network, interconnected through a framework known as the CANDIL Data Fabric. The diagram below illustrates the overall architecture and how its components interact.
+
 ![NDT_architecture](NDT_architecture.png)
 
 # Demo Video
 
 # Deployment Guide
-
+Each component is deployed independently following the guides below:
 - [Real Network Deployment](./realnetwork/README.md)
+OpenStack-based deployment of a virtual network with FRRouting routers, supporting realistic traffic flows including standard and heavy hitter flows.
+- **CANDIL Data Fabric**
+Semantic framework for real-time data integration and knowledge graph construction:
+  - [mouseworld-kg](https://github.com/Mouseworld-Lab/mouseworld-kg)
+  - [mouseworld-ontology](https://github.com/Mouseworld-Lab/mouseworld-ontology)
 - [Edge Deployment](./Edge/rn-edge/README.md)
+Kubernetes-based edge layer where client pods interface with both networks and generate realistic traffic.
 - [Twin Network Deployment](./deployment-kne/README.md)
+Digital twin of the Real Network, deployed with KNE to emulate network scenarios.
 
 
