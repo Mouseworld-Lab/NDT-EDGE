@@ -68,7 +68,7 @@ The demonstrator comprises two separate environments: a Real Network and a Twin 
 ---
 
 # Demo Video
-The demo video will be available soon ...
+[![Ver en YouTube](https://img.youtube.com/vi/v-coT4HT4Tw/0.jpg)](https://www.youtube.com/watch?v=v-coT4HT4Tw)
 
 --- 
 # Deployment Guide
